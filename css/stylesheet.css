@@ -1,0 +1,67 @@
+.navbar-collapse {
+  background-color: black;
+  width: 100%;
+}
+.nav {
+  display: inline-block;
+}
+#home {
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  left: 5%;
+}
+.nav li a {
+  color: white;
+  font-size: 18px;
+}
+.nav li a:hover {
+  color: black;
+}
+.nav li a:active {
+  color: black;
+}
+#logo {
+  border-radius: 50%;
+  float: left;
+  height: 35px;
+  margin-left: 20px;
+  margin-top: 8px;
+  width: 35px;
+}
+.info {
+  left: 95%;
+}
+.dropdown-menu {
+  background-color: gray;
+}
+.home {
+  width: 100%;
+}
+.home-background-image {
+  background-image: url(http://i.imgur.com/UxydDxe.png);
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  height: 650px;
+  overflow: hidden;
+}
+.home h3 {
+  color: white;
+  font-size: 3em;
+  position: absolute;
+  text-align: center;
+  top: 35%;
+  width: 100%
+}
+.home h1 {
+  color: white;
+  font-size: 5em;
+  position: absolute;
+  text-align: center;
+  top: 45%;
+  width: 100%;
+}
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
