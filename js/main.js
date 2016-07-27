@@ -51,7 +51,7 @@ function apiRequests() {
           method: 'GET',
           dataType: 'json',
           success: function(fccData) {
-            arrayOfUsernames.push([fccData.about.username, fccData.about.browniePoints]);
+            arrayOfUsernames.push([object.displayName+" @"+fccData.about.username, fccData.about.browniePoints]);
           },
           error: function() {
             console.log(object.username + ' does not have an FCC account linked to GitHub.');
@@ -71,7 +71,7 @@ $(document).ready(function() {
   });
   arrayOfUsernames.forEach(function(user) {
     console.log('hi');
-    $('.leaderboard > .container').append('<div class="row"><h3>User: ' + user[0] + '</h3><h4>Brownie Points: ' + user[1] + '</div>');
+    $('.leaderboard > .container').append('<div class="row"><h3>' + user[0] + '</h3><h4>Brownie Points: ' + user[1] + '</div>');
   });
   showHome();
   $('#about').on('click', function() {
