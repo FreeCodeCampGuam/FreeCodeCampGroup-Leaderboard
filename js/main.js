@@ -38,16 +38,16 @@ $(document).ready(function() {
   $('.home').hide();
   $('.contact').hide();
   $.ajax({
-    url: 'https://api.gitter.im/v1/rooms/206276256818266112/users',
+    url: 'https://discordapp.com/api/guilds/206276256818266112/members?limit=3',
     headers: {
-      'Authorization': 'Bearer {{4277caf3b83c61142f47eef26b0bd41786285ae9}}',
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Authorization: 'Bot MjA2MzIxNzc5Njc5OTUyODk3.CnnfwA.cLmD9AfI-5ugzVdMRSPgK4uyp1Q',
     },
     method: 'GET',
     dataType: 'json',
     success: function(data) {
-      console.log('success!');
+      data.forEach(function(object) {
+        console.log(object.user.username);
+      });
     },
     error: function() {
       console.log('failed');
