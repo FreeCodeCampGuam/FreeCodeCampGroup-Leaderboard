@@ -38,15 +38,22 @@ $(document).ready(function() {
   $('.home').hide();
   $('.contact').hide();
   $.ajax({
-    url: 'https://discordapp.com/api/guilds/206276256818266112/members?limit=3',
+    url: 'https://api.gitter.im/v1/rooms/56f9df0785d51f252abb4f57/users',
     headers: {
-      Authorization: 'Bot MjA2MzIxNzc5Njc5OTUyODk3.CnnfwA.cLmD9AfI-5ugzVdMRSPgK4uyp1Q',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      Authorization: 'Bearer 4277caf3b83c61142f47eef26b0bd41786285ae9'
     },
     method: 'GET',
     dataType: 'json',
     success: function(data) {
+      // console.log(data);
+      var arrayOfUsernames = [];
       data.forEach(function(object) {
-        console.log(object.user.username);
+        arrayOfUsernames.push(object.username);
+      });
+      arrayOfUsernames = arrayOfUsernames.map(function(username) {
+        
       });
     },
     error: function() {
