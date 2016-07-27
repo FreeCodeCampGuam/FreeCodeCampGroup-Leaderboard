@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Camp Groups</title>
+  <title>freeCodeCamp | Guam</title>
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -21,12 +21,13 @@
 <body>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-      <li><a href="#" id="home">freeCodeCampGroups</a></li>
+      <li><a href="#" id="home">freeCodeCampGuam</a></li>
       <img id="logo" src="images/Logo.png" alt="" />
-      <li class="info"><a href="#">About</a></li>
-      <li class="info"><a href="#">Contact</a></li>
-      <li class="dropdown info">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Groups <b class="caret"></b></a>
+      <li class="info"><a id="about" href="#">About</a></li>
+      <li class="info"><a id="contact" href="#">Contact</a></li>
+      <li class="info"><a id="leaderboard" href="#">Leaderboard</a></li>
+      <!-- <li class="dropdown info">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Leaderboard <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="#">Search</a></li>
           <li><a href="#">List</a></li>
@@ -34,13 +35,36 @@
           <li><a href="#">Add</a></li>
           <li><a href="#">Join</a></li>
         </ul>
-      </li>
+      </li> -->
     </ul>
   </div>
+  <!-- home page -->
+  <!-- TODO: develop a footer that has social media shares and stuff -->
   <div class="home">
     <h3>Find Your Local</h3>
     <h1>freeCodeCamp Group</h1>
-    <div class="home-background-image"></div>
+    <div id="home-background-image"></div>
+  </div>
+  <!-- about page -->
+  <div class="about">
+    <h1>About freeCodeCampGuam</h1>
+    <hr size="2" width="80%" />
+    <p>
+      Man bun chambray freegan trust fund everyday carry, banh mi biodiesel gluten-free. Humblebrag pitchfork swag, next level raw denim hoodie selvage hashtag fap gentrify. Gluten-free ramps echo park hella, biodiesel drinking vinegar neutra pitchfork austin chartreuse. Disrupt migas readymade, stumptown health goth kale chips kitsch marfa pickled affogato blog taxidermy hashtag. Etsy lomo YOLO, biodiesel farm-to-table chia cliche pork belly sriracha keytar brooklyn direct trade marfa ennui. Vice fingerstache photo booth tattooed cray. Heirloom retro taxidermy sustainable.
+    </p>
+  </div>
+  <div class="contact">
+    <h1>Contact Us</h1>
+    <hr width="40%" align="left" />
+    <h3>Phone: </h3>
+    <h3>Email: </h3>
+  </div>
+  <div class="leaderboard">
+    <div id="leaderboardHeader" class="row">
+      <h1>freeCodeCampGuam Leaderboard</h1>
+    </div>
+    <div class="container"></div>
+
   </div>
 </body>
 </html>

@@ -30,7 +30,7 @@
   width: 35px;
 }
 .info {
-  left: 95%;
+  left: 90%;
 }
 .dropdown-menu {
   background-color: gray;
@@ -38,12 +38,12 @@
 .home {
   width: 100%;
 }
-.home-background-image {
+#home-background-image {
   background-image: url(http://i.imgur.com/UxydDxe.png);
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
-  height: 650px;
+  height: 675px;
   overflow: hidden;
 }
 .home h3 {
@@ -64,4 +64,52 @@
 }
 ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
+}
+.about {
+  margin-top: 10%;
+}
+.about h1 {
+  text-align: center;
+}
+.about p {
+  margin: 0 auto;
+  margin-top: 30px;
+  text-align: center;
+  width: 70%;
+}
+.contact {
+  margin-left: 8%;
+  margin-top: 4%;
+}
+.leaderboard {
+  margin-top : 30px;
+}
+.leaderboard h1 {
+  line-height: 28px;
+  text-align: center;
+}
+#leaderboardHeader {
+  width: 50%;
+  margin: 0 auto;
+}
+.container {
+  width: 50%;
+  margin: 0 auto;
+}
+.row {
+  background-color: rgb(31, 232, 232);
+  height: 68px;
+  width: 100%;
+  margin-top: 2px;
+  text-align: center;
+}
+.container img {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  float: left;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-left: 5px;
 }
