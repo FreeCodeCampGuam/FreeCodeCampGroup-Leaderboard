@@ -43,20 +43,46 @@ function apiRequests() {
     method: 'GET',
     dataType: 'json',
     success: function(gitterData) {
-      //console.log(gitterData);
-      gitterData.forEach(function(object) {
+      // console.log(gitterData);
+      gitterData.forEach(function(object, i) {
+        var camper = {
+          "display" : object.displayName,
+          "username" : "--loading--",
+          "points" : -1,
+          "created" : null
+        };
+        arrayOfUsernames.push(camper)
+        $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'></div>');
         $.ajax({
           url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username.toLowerCase(),
           async: false,
           method: 'GET',
           dataType: 'json',
           success: function(fccData) {
-            arrayOfUsernames.push([object.displayName, fccData.about.username, fccData.about.browniePoints]);
+            updateCamper({"username" : fccData.about.username, "points" : fccData.about.browniePoints})
+            //camper.concat([fccData.about.username, fccData.about.browniePoints]);
           },
           error: function() {
-            arrayOfUsernames.push([object.displayName, object.username, null]);
+            updateCamper({"username" : object.username, "points" : null})
+            //camper.concat([object.username, null]);
           }
         });
+        // Github call to get 'join' date. assuming joined github at same time
+        $.ajax({
+          url: 'https://api.github.com/users/' + object.username,
+          async: false,
+          method: 'GET',
+          dataType: 'json',
+          success: function(hubData) {
+            updateCamper({"created" : hubData.created_at})
+            //camper.push(hubData.created_at)
+          },
+          error: function() {
+            console.log('github request error on user: ' + object.username)
+          }
+        });
+        /*console.log(camper)
+        arrayOfUsernames.push(camper)*/
       });
     },
     error: function() {
@@ -64,16 +90,24 @@ function apiRequests() {
     }
   });
 }
+
+function updateCamper(data) {
+  $('#place'+place).
+}
+function _displayCamper(place, data) {
+  $('#place'+place).
+}
+
 $(document).ready(function() {
   apiRequests();
   arrayOfUsernames.sort(function(a, b) {
     return b[2] - a[2];
   });
-  arrayOfUsernames.forEach(function(user) {
+  arrayOfUsernames.forEach(function(user, i) {
     if (user[2] === null)
-      $('.leaderboard > .container').append('<div class="row"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Account not linked to freeCodeCamp</div>');
+      $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4 class="error">Account not linked to freeCodeCamp</div>');
     else
-      $('.leaderboard > .container').append('<div class="row"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Brownie Points: ' + user[2] + '</div>');
+      $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Brownie Points: ' + user[2] + '</div>');
   });
   showHome();
   $('#about').on('click', function() {
