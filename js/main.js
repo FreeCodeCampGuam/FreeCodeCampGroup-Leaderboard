@@ -34,7 +34,7 @@ var arrayOfUsernames = [];
 function apiRequests() {
   $.ajax({
     async: false,
-    url: 'https://api.gitter.im/v1/rooms/56f9df0785d51f252abb4f57/users',
+    url: 'https://api.gitter.im/v1/rooms/56f9df0785d51f252abb4f57/users?limit=300',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -43,18 +43,18 @@ function apiRequests() {
     method: 'GET',
     dataType: 'json',
     success: function(gitterData) {
-      // console.log(gitterData);
+      //console.log(gitterData);
       gitterData.forEach(function(object) {
         $.ajax({
-          url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username,
+          url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username.toLowerCase(),
           async: false,
           method: 'GET',
           dataType: 'json',
           success: function(fccData) {
-            arrayOfUsernames.push([object.displayName + " @" + fccData.about.username, fccData.about.browniePoints]);
+            arrayOfUsernames.push([object.displayName, fccData.about.username, fccData.about.browniePoints]);
           },
           error: function() {
-            arrayOfUsernames.push([object.displayName + " @" + object.username, null]);
+            arrayOfUsernames.push([object.displayName, object.username, null]);
           }
         });
       });
@@ -67,13 +67,13 @@ function apiRequests() {
 $(document).ready(function() {
   apiRequests();
   arrayOfUsernames.sort(function(a, b) {
-    return b[1] - a[1];
+    return b[2] - a[2];
   });
   arrayOfUsernames.forEach(function(user) {
-    if (user[1] === null)
-      $('.leaderboard > .container').append('<div class="row"><h3>' + user[0] + '</h3><h4>Account not linked to freeCodeCamp</div>');
+    if (user[2] === null)
+      $('.leaderboard > .container').append('<div class="row"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Account not linked to freeCodeCamp</div>');
     else
-      $('.leaderboard > .container').append('<div class="row"><h3>' + user[0] + '</h3><h4>Brownie Points: ' + user[1] + '</div>');
+      $('.leaderboard > .container').append('<div class="row"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Brownie Points: ' + user[2] + '</div>');
   });
   showHome();
   $('#about').on('click', function() {
