@@ -53,6 +53,7 @@ function apiRequests() {
         };
         arrayOfUsernames.push(camper)
         $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'></div>');
+        _displayCamper(i+1,camper);
         $.ajax({
           url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username.toLowerCase(),
           async: false,
@@ -92,7 +93,7 @@ function apiRequests() {
 }
 
 function updateCamper(data) {
-  $('#place'+place).
+  //sort and redisplay
 }
 function _displayCamper(place, data) {
   $('#place'+place).
