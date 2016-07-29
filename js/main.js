@@ -50,6 +50,7 @@ function apiRequests() {
           "display" : object.displayName,
           "username" : object.username,
           "points" : -1,
+          "avatar" : null,
           "created" : null
         };
         arrayOfUsernames.push(camper);
@@ -75,7 +76,7 @@ function apiRequests() {
           method: 'GET',
           dataType: 'json',
           success: function(hubData) {
-            updateCamper({"username" : object.username, "created" : hubData.created_at})
+            updateCamper({"username" : object.username, "avatar" : hubData.avatar_url, "created" : hubData.created_at})
             //camper.push(hubData.created_at)
           },
           error: function() {
@@ -109,12 +110,16 @@ function updateCamper(camper) {
   });
 }
 function _displayCamper(place, camper) {
-  $('#place'+place).html('<h3>' + camper.display + ' @' + camper.username + '</h3>')
+  var img = ''; // insert no-avatar image here
+  if (camper.avatar !== null) {
+    img = '<img class="avatar" src="'+camper.avatar+'" alt="" />';
+  }
+  $('#place'+place).html(img + '<h3>' + camper.display + ' @' + camper.username + '</h3>')
   if (camper.points >= 0) {
-    $('#place'+place).append('<h4>Brownie Points: '+camper.points)
+    $('#place'+place).append('<h4>Brownie Points: '+camper.points+'</h4>')
   }
   else {
-    $('#place'+place).append('<h4 class="error">Account not linked to freeCodeCamp')
+    $('#place'+place).append('<h4 class="error">Account not linked to freeCodeCamp</h4>')
   }
 }
 
