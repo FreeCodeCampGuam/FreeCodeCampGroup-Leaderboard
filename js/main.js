@@ -1,30 +1,4 @@
-$(document).ready(function() {
-  apiRequests();
-  // arrayOfUsernames.sort(function(a, b) {
-  //   return b[2] - a[2];
-  // });
-  arrayOfUsernames.forEach(function(user, i) {
-    if (user[2] === null)
-    $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4 class="error">Account not linked to freeCodeCamp</div>');
-    else
-    $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Brownie Points: ' + user[2] + '</div>');
-  });
-  showHome();
-  $('#about').on('click', function() {
-    showAbout();
-  });
-  $('#contact').on('click', function() {
-    showContact();
-  });
-  $('#home').on('click', function() {
-    showHome();
-  });
-  $('#leaderboard').on('click', function() {
-    showLeaderboard();
-  });
-});
 var arrayOfUsernames = [];
-
 function showAbout() {
   $('.about').show();
   var hideOthers = function() {
@@ -71,15 +45,15 @@ function apiRequests() {
     success: function(gitterData) {
       // console.log(gitterData);
       gitterData.forEach(function(object, i) {
+        $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
         var camper = {
           "display" : object.displayName,
           "username" : object.username,
           "points" : -1,
+          "avatar" : null,
           "created" : null
         };
         arrayOfUsernames.push(camper);
-        $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'></div>');
-        _displayCamper(i+1,camper);
         $.ajax({
           url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username.toLowerCase(),
           async: true,
@@ -102,7 +76,7 @@ function apiRequests() {
           method: 'GET',
           dataType: 'json',
           success: function(hubData) {
-            updateCamper({"username" : object.username, "created" : hubData.created_at});
+            updateCamper({"username" : object.username, "avatar" : hubData.avatar_url, "created" : hubData.created_at});
             //camper.push(hubData.created_at)
           },
           error: function() {
@@ -136,11 +110,50 @@ function updateCamper(camper) {
   });
 }
 function _displayCamper(place, camper) {
-  $('#place'+place).html('<h3>' + camper.display + ' @' + camper.username + '</h3>');
+  var img = ''; // insert no-avatar image here
+  if (camper.avatar !== null) {
+    img = '<img class="avatar" src="'+camper.avatar+'" alt="" />';
+  }
+  $('#place'+place).html(img + '<h3>' + camper.display + ' @' + camper.username + '</h3>')
   if (camper.points >= 0) {
-    $('#place'+place).append('<h4>Brownie Points: '+camper.points);
+    $('#place'+place).append('<h4>Brownie Points: '+camper.points+'</h4>')
   }
   else {
-    $('#place'+place).append('<h4 class="error">Account not linked to freeCodeCamp');
+    $('#place'+place).append('<h4 class="error">Account not linked to freeCodeCamp</h4>')
   }
 }
+
+$(document).ready(function() {
+  apiRequests();
+  /*arrayOfUsernames.sort(function(a, b) {
+    return b[2] - a[2];
+  });
+  arrayOfUsernames.forEach(function(user, i) {
+    if (user[2] === null)
+      $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4 class="error">Account not linked to freeCodeCamp</div>');
+    else
+      $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Brownie Points: ' + user[2] + '</div>');
+  });*/
+
+  // http://stackoverflow.com/questions/15991356/jquery-scroll-to-section-of-page
+  for (let label of ["home","about","contact","leaderboard"]) {
+      $("#"+label).click(function() {
+        $('html, body').animate({
+            scrollTop: $("."+label).offset().top - 40
+        }, 700);
+      });
+  }
+  /*showHome();
+  $('#about').on('click', function() {
+    showAbout();
+  });
+  $('#contact').on('click', function() {
+    showContact();
+  });
+  $('#home').on('click', function() {
+    showHome();
+  });
+  $('#leaderboard').on('click', function() {
+    showLeaderboard();
+  });*/
+});
