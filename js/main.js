@@ -45,15 +45,14 @@ function apiRequests() {
     success: function(gitterData) {
       // console.log(gitterData);
       gitterData.forEach(function(object, i) {
+        $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
         var camper = {
           "display" : object.displayName,
           "username" : object.username,
           "points" : -1,
           "created" : null
         };
-        arrayOfUsernames.push(camper)
-        $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'></div>');
-        _displayCamper(i+1,camper);
+        arrayOfUsernames.push(camper);
         $.ajax({
           url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username.toLowerCase(),
           async: true,
@@ -121,7 +120,7 @@ function _displayCamper(place, camper) {
 
 $(document).ready(function() {
   apiRequests();
-  arrayOfUsernames.sort(function(a, b) {
+  /*arrayOfUsernames.sort(function(a, b) {
     return b[2] - a[2];
   });
   arrayOfUsernames.forEach(function(user, i) {
@@ -129,8 +128,17 @@ $(document).ready(function() {
       $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4 class="error">Account not linked to freeCodeCamp</div>');
     else
       $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Brownie Points: ' + user[2] + '</div>');
-  });
-  showHome();
+  });*/
+
+  // http://stackoverflow.com/questions/15991356/jquery-scroll-to-section-of-page
+  for (let label of ["home","about","contact","leaderboard"]) {
+      $("#"+label).click(function() {
+        $('html, body').animate({
+            scrollTop: $("."+label).offset().top - 40
+        }, 700);
+      });
+  }
+  /*showHome();
   $('#about').on('click', function() {
     showAbout();
   });
@@ -142,5 +150,5 @@ $(document).ready(function() {
   });
   $('#leaderboard').on('click', function() {
     showLeaderboard();
-  });
+  });*/
 });
