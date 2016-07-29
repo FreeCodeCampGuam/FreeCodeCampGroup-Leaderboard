@@ -1,3 +1,30 @@
+$(document).ready(function() {
+  apiRequests();
+  // arrayOfUsernames.sort(function(a, b) {
+  //   return b[2] - a[2];
+  // });
+  arrayOfUsernames.forEach(function(user, i) {
+    if (user[2] === null)
+    $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4 class="error">Account not linked to freeCodeCamp</div>');
+    else
+    $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Brownie Points: ' + user[2] + '</div>');
+  });
+  showHome();
+  $('#about').on('click', function() {
+    showAbout();
+  });
+  $('#contact').on('click', function() {
+    showContact();
+  });
+  $('#home').on('click', function() {
+    showHome();
+  });
+  $('#leaderboard').on('click', function() {
+    showLeaderboard();
+  });
+});
+var arrayOfUsernames = [];
+
 function showAbout() {
   $('.about').show();
   var hideOthers = function() {
@@ -30,7 +57,6 @@ function showLeaderboard() {
     $('.home').hide();
   }();
 }
-var arrayOfUsernames = [];
 function apiRequests() {
   $.ajax({
     async: false,
@@ -51,7 +77,7 @@ function apiRequests() {
           "points" : -1,
           "created" : null
         };
-        arrayOfUsernames.push(camper)
+        arrayOfUsernames.push(camper);
         $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'></div>');
         _displayCamper(i+1,camper);
         $.ajax({
@@ -60,12 +86,12 @@ function apiRequests() {
           method: 'GET',
           dataType: 'json',
           success: function(fccData) {
-            updateCamper({"username" : object.username, "points" : fccData.about.browniePoints})  // removed about.username cause we need to find users later by unique value
+            updateCamper({"username" : object.username, "points" : fccData.about.browniePoints});  // removed about.username cause we need to find users later by unique value
             // not sure if displayName is unique. object.username should be though. if we use object and about.username, might be differences
             //camper.concat([fccData.about.username, fccData.about.browniePoints]);
           },
           error: function() {
-            updateCamper({"username" : object.username, "points" : -2})  // shrug*
+            updateCamper({"username" : object.username, "points" : -2});  // shrug*
             //camper.concat([object.username, null]);
           }
         });
@@ -76,11 +102,11 @@ function apiRequests() {
           method: 'GET',
           dataType: 'json',
           success: function(hubData) {
-            updateCamper({"username" : object.username, "created" : hubData.created_at})
+            updateCamper({"username" : object.username, "created" : hubData.created_at});
             //camper.push(hubData.created_at)
           },
           error: function() {
-            console.log('github request error on user: ' + object.username)
+            console.log('github request error on user: ' + object.username);
           }
         });
         /*console.log(camper)
@@ -97,7 +123,7 @@ function updateCamper(camper) {
   for (let c of arrayOfUsernames) {  // is there a quicker find?
     if (c.username === camper.username) {
       for (let prop in camper) {
-        c[prop] = camper[prop]
+        c[prop] = camper[prop];
       }
       break;
     }
@@ -110,37 +136,11 @@ function updateCamper(camper) {
   });
 }
 function _displayCamper(place, camper) {
-  $('#place'+place).html('<h3>' + camper.display + ' @' + camper.username + '</h3>')
+  $('#place'+place).html('<h3>' + camper.display + ' @' + camper.username + '</h3>');
   if (camper.points >= 0) {
-    $('#place'+place).append('<h4>Brownie Points: '+camper.points)
+    $('#place'+place).append('<h4>Brownie Points: '+camper.points);
   }
   else {
-    $('#place'+place).append('<h4 class="error">Account not linked to freeCodeCamp')
+    $('#place'+place).append('<h4 class="error">Account not linked to freeCodeCamp');
   }
 }
-
-$(document).ready(function() {
-  apiRequests();
-  arrayOfUsernames.sort(function(a, b) {
-    return b[2] - a[2];
-  });
-  arrayOfUsernames.forEach(function(user, i) {
-    if (user[2] === null)
-      $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4 class="error">Account not linked to freeCodeCamp</div>');
-    else
-      $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Brownie Points: ' + user[2] + '</div>');
-  });
-  showHome();
-  $('#about').on('click', function() {
-    showAbout();
-  });
-  $('#contact').on('click', function() {
-    showContact();
-  });
-  $('#home').on('click', function() {
-    showHome();
-  });
-  $('#leaderboard').on('click', function() {
-    showLeaderboard();
-  });
-});
