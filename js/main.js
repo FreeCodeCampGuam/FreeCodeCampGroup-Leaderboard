@@ -1,35 +1,3 @@
-function showAbout() {
-  $('.about').show();
-  var hideOthers = function() {
-    $('.contact').hide();
-    $('.home').hide();
-    $('.leaderboard').hide();
-  }();
-}
-function showContact() {
-  $('.contact').show();
-  var hideOthers = function() {
-    $('.about').hide();
-    $('.home').hide();
-    $('.leaderboard').hide();
-  }();
-}
-function showHome() {
-  $('.home').show();
-  var hideOthers = function() {
-    $('.about').hide();
-    $('.contact').hide();
-    $('.leaderboard').hide();
-  }();
-}
-function showLeaderboard() {
-  $('.leaderboard').show();
-  var hideOthers = function() {
-    $('.about').hide();
-    $('.contact').hide();
-    $('.home').hide();
-  }();
-}
 var arrayOfUsernames = [];
 function apiRequests() {
   $.ajax({
@@ -106,11 +74,14 @@ function updateCamper(camper) {
     return b.points - a.points;
   });
   arrayOfUsernames.forEach(function(user, i) {
+    if (user.points < 0) {
+      $('hr').insertBefore($('#place'+(i+1)));
+    }
     _displayCamper(i+1,user);
   });
 }
 function _displayCamper(place, camper) {
-  var img = ''; // insert no-avatar image here
+  var img = '<img class="avatar" src="images/favicons/favicon.ico" alt="" />'; // insert no-avatar image here
   if (camper.avatar !== null) {
     img = '<img class="avatar" src="'+camper.avatar+'" alt="" />';
   }
@@ -125,35 +96,12 @@ function _displayCamper(place, camper) {
 
 $(document).ready(function() {
   apiRequests();
-  /*arrayOfUsernames.sort(function(a, b) {
-    return b[2] - a[2];
-  });
-  arrayOfUsernames.forEach(function(user, i) {
-    if (user[2] === null)
-      $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4 class="error">Account not linked to freeCodeCamp</div>');
-    else
-      $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"><h3>' + user[0] + ' @' + user[1] + '</h3><h4>Brownie Points: ' + user[2] + '</div>');
-  });*/
-
   // http://stackoverflow.com/questions/15991356/jquery-scroll-to-section-of-page
   for (let label of ["home","about","contact","leaderboard"]) {
-      $("#"+label).click(function() {
-        $('html, body').animate({
-            scrollTop: $("."+label).offset().top - 40
-        }, 700);
-      });
+    $("#"+label).click(function() {
+      $('html, body').animate({
+        scrollTop: $("."+label).offset().top - 40
+      }, 700);
+    });
   }
-  /*showHome();
-  $('#about').on('click', function() {
-    showAbout();
-  });
-  $('#contact').on('click', function() {
-    showContact();
-  });
-  $('#home').on('click', function() {
-    showHome();
-  });
-  $('#leaderboard').on('click', function() {
-    showLeaderboard();
-  });*/
 });

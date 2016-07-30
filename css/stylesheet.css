@@ -101,7 +101,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   width: 600px;
   margin: 0 auto;
   margin-top: 2px;
-  text-align: center;
+  text-align: left;
   border: solid 2px grey;
 }
 .container img {
