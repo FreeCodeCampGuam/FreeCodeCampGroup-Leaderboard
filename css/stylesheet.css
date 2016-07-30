@@ -96,12 +96,13 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   margin: 0 auto;
 }
 .row {
-  background-color: rgb(31, 232, 232);
+  background-color: #daddda;
   height: 68px;
   width: 600px;
   margin: 0 auto;
   margin-top: 2px;
   text-align: center;
+  border: solid 2px grey;
 }
 .container img {
   position: relative;
