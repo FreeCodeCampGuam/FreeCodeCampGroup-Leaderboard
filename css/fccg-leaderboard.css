@@ -1,0 +1,58 @@
+.leaderboard {
+  font-family: Helvetica, Arial, sans-serif;
+  border: solid 1px black;
+  border-radius: 1em;
+  background-color: #330000;
+  width: 90%;
+  margin: 0 auto;
+  /* The header */ }
+  .leaderboard #leaderboardHeader h1 {
+    text-align: center;
+    font-size: 16pt;
+    color: white; }
+  .leaderboard .container {
+    width: 100%;
+    padding: 0;
+    margin: 0; }
+    .leaderboard .container .row:nth-of-type(odd) {
+      background-color: #eee; }
+    .leaderboard .container .row:nth-of-type(even) {
+      background-color: #ddd; }
+    .leaderboard .container .row {
+      background-color: white;
+      margin: 1px; }
+      .leaderboard .container .row img.avatar {
+        float: left;
+        margin: 1.2em;
+        max-width: 100px; }
+        @media screen and (max-width: 750px) {
+          .leaderboard .container .row img.avatar {
+            transform: scale(1);
+            padding: 0; } }
+      .leaderboard .container .row div.user_info {
+        float: left;
+        width: 45%; }
+      .leaderboard .container .row div.points {
+        float: right;
+        width: 35%;
+        text-align: right;
+        padding: 5px 20px; }
+        .leaderboard .container .row div.points img.brownie {
+          width: 30px; }
+        @media screen and (max-width: 750px) {
+          .leaderboard .container .row div.points {
+            float: none;
+            clear: both;
+            width: 100%;
+            text-align: left;
+            border-top: solid 1px #330000; }
+            .leaderboard .container .row div.points h4 {
+              float: left; }
+            .leaderboard .container .row div.points img.brownie {
+              float: right; } }
+    .leaderboard .container .row.first_error {
+      margin-top: 5em; }
+    .leaderboard .container .row.error {
+      color: red; }
+
+/*# sourceMappingURL=fccg-leaderboard.css.map */
