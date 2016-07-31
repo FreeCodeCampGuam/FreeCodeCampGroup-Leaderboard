@@ -1,5 +1,5 @@
 var arrayOfCampers = [];
-var dateThreshold = new Date(2016,7,1);  // change this via user-input
+var dateThreshold = new Date(2016,5,1);  // change this via user-input
 var ranks = [0,50,100,200,300,400];  // probably want to increase these later
 // updates the camper's brownie 'rank'
 // notice, rank can be 0. returns false if that's the case
@@ -47,7 +47,6 @@ function apiRequests() {
     success: function(gitterData) {
       // console.log(gitterData);
       gitterData.forEach(function(object, i) {
-        $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
         var camper = {
           "display" : object.displayName,
           "username" : object.username,
@@ -80,7 +79,7 @@ function apiRequests() {
           method: 'GET',
           dataType: 'json',
           success: function(hubData) {
-            updateCamper({"username" : object.username, "avatar" : hubData.avatar_url, "created" : hubData.created_at});
+            updateCamper({"username" : object.username, "avatar" : hubData.avatar_url, "created" : new Date(hubData.created_at)});
             //camper.push(hubData.created_at)
           },
           error: function() {
@@ -104,7 +103,7 @@ function updateCamper(camper) {
         c[prop] = camper[prop];
       }
       updateRank(c);  // maybe this should be a method of the camper class
-      updateAge(c.created);
+      updateAge(c);
       break;
     }
   }
@@ -112,10 +111,12 @@ function updateCamper(camper) {
   arrayOfCampers.sort(function(a, b) {
     return b.points - a.points;
   });
-  var filteredUsers = arrayOfCampers.filter()
+  var filteredUsers = arrayOfCampers.filter(aCamper => aCamper.created > dateThreshold)
 
+  $('.leaderboard > .container').html('')
   var found = false;
-  arrayOfCampers.forEach(function(user, i) {
+  filteredUsers.forEach(function(user, i) {
+    $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
     if (user.points < 0 && !found) {
       $('#place'+(i+1)).addClass('first_error');
       found = true;
