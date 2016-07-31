@@ -30,7 +30,7 @@ function treatAsUTC(date) {
 }
 function daysBetween(startDate, endDate) {
   var millisecondsPerDay = 24 * 60 * 60 * 1000;
-  return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+  return Math.round((treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay);
 }
 
 function apiRequests() {
@@ -47,6 +47,7 @@ function apiRequests() {
     success: function(gitterData) {
       // console.log(gitterData);
       gitterData.forEach(function(object, i) {
+        // $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
         var camper = {
           "display" : object.displayName,
           "username" : object.username,
@@ -113,7 +114,7 @@ function updateCamper(camper) {
   });
   var filteredUsers = arrayOfCampers.filter(aCamper => aCamper.created > dateThreshold)
 
-  $('.leaderboard > .container').html('')
+  $('.leaderboard > .container').html('<div>Displaying Users that joined within '+dateToAge(dateThreshold)+' days</div>')
   var found = false;
   filteredUsers.forEach(function(user, i) {
     $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
@@ -128,13 +129,20 @@ function updateCamper(camper) {
   });
 }
 function _displayCamper(place, camper) {
-  var img = '<img class="avatar mostly_transparent" src="images/favicons/favicon.ico" alt="" />'; // insert no-avatar image here
+  // avatar
+  var img = '<img class="avatar mostly_transparent" src="images/favicons/android-chrome-192x192.png" alt="" />'; // insert no-avatar image here
   if (camper.avatar !== null) {
     img = '<img class="avatar" src="'+camper.avatar+'" alt="" />';
   }
-  $('#place'+place).html(img + '<div class="user_info"><h3 class="display">' + camper.display + '</h3><span class="mention">@' + camper.username + '</span></div>');
+  $('#place'+place).html(img + '<div class="user_info"><h3 class="display">'+camper.display+'</h3>'+
+      '<span class="mention">@' + camper.username + '</span></div>');
+
+  // age
+  $('#place'+place).append('<div class="age col2">Joined '+camper.daysOld+' days ago.</div>')
   if (camper.points >= 0) {
-    $('#place'+place).append('<div class="points"><h4>Brownie Points: '+camper.points+'</h4><img class="brownie" src="images/ranks/brownie'+camper.rank+'.png" alt="rank'+camper.rank+'"/></div>');
+    $('#place'+place).append('<div class="points"><h4>Brownie Points: '+camper.points+'</h4>'+
+        '<img class="brownie" src="images/ranks/brownie'+camper.rank+'.png" alt="rank'+camper.rank+'"/>'+
+        '</div>');
   }
   else {
     $('#place'+place).append('<div class="error"><h4>Account not linked to freeCodeCamp</h4></div>');
