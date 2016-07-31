@@ -1,6 +1,6 @@
-var arrayOfUsernames = [];
+var arrayOfCampers = [];
+var dateThreshold = new Date(2016,7,1);  // change this via user-input
 var ranks = [0,50,100,200,300,400];  // probably want to increase these later
-
 // updates the camper's brownie 'rank'
 // notice, rank can be 0. returns false if that's the case
 function updateRank(camper) {
@@ -14,6 +14,23 @@ function updateRank(camper) {
   }
   camper.rank = rank;
   return rank !== 0;
+}
+function updateAge(camper) {
+  camper.daysOld = dateToAge(camper.created)
+}
+
+function dateToAge(date) {
+  return daysBetween(date, Date.now())
+}
+// http://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
+function treatAsUTC(date) {
+  var result = new Date(date);
+  result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+  return result;
+}
+function daysBetween(startDate, endDate) {
+  var millisecondsPerDay = 24 * 60 * 60 * 1000;
+  return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
 }
 
 function apiRequests() {
@@ -37,9 +54,10 @@ function apiRequests() {
           "points" : -1,
           "rank" : 0,
           "avatar" : null,
-          "created" : null
+          "created" : null,
+          "daysOld" : null
         };
-        arrayOfUsernames.push(camper);
+        arrayOfCampers.push(camper);
         $.ajax({
           url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username.toLowerCase(),
           async: true,
@@ -70,7 +88,7 @@ function apiRequests() {
           }
         });
         /*console.log(camper)
-        arrayOfUsernames.push(camper)*/
+        arrayOfCampers.push(camper)*/
       });
     },
     error: function() {
@@ -80,22 +98,24 @@ function apiRequests() {
 }
 
 function updateCamper(camper) {
-  for (let c of arrayOfUsernames) {  // is there a quicker find?
+  for (let c of arrayOfCampers) {  // is there a quicker find?
     if (c.username === camper.username) {
       for (let prop in camper) {
         c[prop] = camper[prop];
       }
       updateRank(c);  // maybe this should be a method of the camper class
+      updateAge(c.created);
       break;
     }
   }
   console.log(camper)
-  arrayOfUsernames.sort(function(a, b) {
+  arrayOfCampers.sort(function(a, b) {
     return b.points - a.points;
   });
+  var filteredUsers = arrayOfCampers.filter()
 
   var found = false;
-  arrayOfUsernames.forEach(function(user, i) {
+  arrayOfCampers.forEach(function(user, i) {
     if (user.points < 0 && !found) {
       $('#place'+(i+1)).addClass('first_error');
       found = true;
