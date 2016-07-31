@@ -2,7 +2,7 @@
   font-family: Helvetica, Arial, sans-serif;
   border: solid 1px black;
   border-radius: 1em;
-  background-color: #330000;
+  background-color: #006700;
   width: 90%;
   margin: 0 auto;
   /* The header */ }
@@ -24,7 +24,7 @@
       .leaderboard .container .row img.avatar {
         float: left;
         margin: 1.2em;
-        max-width: 100px; }
+        max-width: 70px; }
         @media screen and (max-width: 750px) {
           .leaderboard .container .row img.avatar {
             transform: scale(1);

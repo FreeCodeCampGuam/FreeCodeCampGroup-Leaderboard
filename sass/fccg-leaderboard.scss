@@ -1,5 +1,7 @@
 $leaderboard-font-stack: Helvetica, Arial, sans-serif;
-$leaderboard-color-brown: #330000;
+$fcc-brown: #330000;
+$fcc-green: #006700;
+$fcc-font: "saxmonoregular";
 
 $small-breakpoint: 750px;
 
@@ -9,7 +11,7 @@ $small-breakpoint: 750px;
   border: solid 1px black;
   border-radius: 1em;
 
-  background-color: $leaderboard-color-brown;
+  background-color: $fcc-green;
 
   width: 90%;
   margin: 0 auto;
@@ -25,7 +27,7 @@ $small-breakpoint: 750px;
 
   .container {
     width: 100%;
-    padding: 0; 
+    padding: 0;
     margin: 0;
 
     .row:nth-of-type(odd) {
@@ -37,12 +39,12 @@ $small-breakpoint: 750px;
 
     .row {
       background-color: white;
-      margin: 1px; 
+      margin: 1px;
 
       img.avatar {
         float: left;
         margin: 1.2em;
-        max-width: 100px;
+        max-width: 70px;
 
         @media screen and (max-width: $small-breakpoint) {
           transform: scale(1);
@@ -62,7 +64,7 @@ $small-breakpoint: 750px;
         }
       }
       div.points {
-        float: right; 
+        float: right;
         width: 35%;
         text-align: right;
         padding: 5px 20px;
@@ -79,7 +81,7 @@ $small-breakpoint: 750px;
           clear: both;
           width: 100%;
           text-align: left;
-          border-top: solid 1px $leaderboard-color-brown;
+          border-top: solid 1px $fcc-brown;
 
           h4 {
             float: left;

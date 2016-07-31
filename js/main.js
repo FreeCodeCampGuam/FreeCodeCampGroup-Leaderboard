@@ -1,5 +1,5 @@
 var arrayOfCampers = [];
-var dateThreshold = new Date(2016,5,1);  // change this via user-input
+var dateThreshold = new Date(2015,5,1);  // change this via user-input
 var ranks = [0,50,100,200,300,400];  // probably want to increase these later
 // updates the camper's brownie 'rank'
 // notice, rank can be 0. returns false if that's the case

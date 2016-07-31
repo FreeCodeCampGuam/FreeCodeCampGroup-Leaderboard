@@ -8,7 +8,7 @@
 #home {
   float: left;
   font-size: 30px;
-  font-weight: bold;
+  font-family: "saxmonoregular";
   left: 5%;
 }
 .nav li a {
