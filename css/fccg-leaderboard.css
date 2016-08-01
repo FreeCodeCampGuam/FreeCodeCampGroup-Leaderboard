@@ -84,14 +84,15 @@
 .leaderboard {
   font-family: Helvetica, Arial, sans-serif;
   border: solid 1px black;
-  border-radius: 1em;
-  background-color: #006700;
+  border-radius: .7em;
+  background-color: #202020;
   width: 90%;
   margin: 0 auto;
   /* The header */ }
   .leaderboard #leaderboardHeader {
-    margin: -.5%;
-    height: 80px; }
+    margin: 10px -0.5%;
+    height: 90px;
+    color: black; }
     .leaderboard #leaderboardHeader h1 {
       text-align: center;
       font-size: 16pt;
