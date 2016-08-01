@@ -1,15 +1,15 @@
-.navbar-collapse {
-  background-color: black;
-  width: 100%;
-}
+/*.container-fluid {
+  padding: 0;
+}*/
 .nav {
   display: inline-block;
 }
 #home {
   float: left;
+  color: white;
+  font-weight: lighter;
   font-size: 30px;
   font-family: "saxmonoregular";
-  left: 5%;
 }
 .nav li a {
   color: white;
@@ -22,16 +22,14 @@
   color: black;
 }
 #logo {
-  border-radius: 50%;
   float: left;
   height: 35px;
-  margin-left: 20px;
   margin-top: 8px;
-  width: 35px;
+  border-radius: 50%;
 }
-.info {
+/*.info {
   left: 90%;
-}
+}*/
 .dropdown-menu {
   background-color: gray;
 }
