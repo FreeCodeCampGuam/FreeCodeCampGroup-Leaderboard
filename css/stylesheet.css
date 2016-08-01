@@ -1,7 +1,48 @@
-.navbar-collapse {
-  background-color: black;
-  width: 100%;
+body{
+  padding-top: 70px;
+  text-align: center
 }
+h1,h2,h3,h4{
+  font-family: saxmonoregular, Arial, sans-serif;
+}
+
+.navbar{
+  font-family: saxmonoregular, Arial, sans-serif;
+}
+
+#home{
+  background-image: url(https://c3.staticflickr.com/9/8339/8280671002_b9affa4df0_o.jpg);
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  height: 400px;
+  overflow: hidden;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+#home #title{
+  background: #222222;
+  margin-top: 160px;
+}
+
+#navFooter{
+  border-radius: 0%;
+  margin: 20px 0px 0px 0px;
+}
+
+/*
+#logo {
+  border-radius: 50%;
+  height: 35px;  
+  width: 35px;
+  
+}
+
+.navbar {
+  background-color: black;
+}
+
 .nav {
   display: inline-block;
 }
@@ -21,14 +62,7 @@
 .nav li a:active {
   color: black;
 }
-#logo {
-  border-radius: 50%;
-  float: left;
-  height: 35px;
-  margin-left: 20px;
-  margin-top: 8px;
-  width: 35px;
-}
+
 .info {
   left: 90%;
 }
@@ -68,7 +102,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 .about {
   margin-top: 5%;
 }
-.about h1 {
+.about h{
   text-align: center;
 }
 .about p {
@@ -81,6 +115,9 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   margin-left: 8%;
   margin-top: 4%;
 }
+
+*/
+
 /*
 .leaderboard {
   margin-top : 30px;
