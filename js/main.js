@@ -114,7 +114,8 @@ function updateCamper(camper) {
   });
   var filteredUsers = arrayOfCampers.filter(aCamper => aCamper.created > dateThreshold)
 
-  $('.leaderboard > .container').html('<div>Displaying Users that joined within '+dateToAge(dateThreshold)+' days</div>')
+  //$('.leaderboard > .container').html('<div>Displaying Users that joined within '+dateToAge(dateThreshold)+' days</div>')
+  $('.leaderboard > .container').html('');
   var found = false;
   filteredUsers.forEach(function(user, i) {
     $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
