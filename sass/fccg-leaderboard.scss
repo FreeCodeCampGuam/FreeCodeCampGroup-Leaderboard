@@ -3,21 +3,25 @@ $fcc-brown: #330000;
 $fcc-green: #006700;
 $fcc-font: "saxmonoregular";
 $leaderboard-black: #202020;
+$leaderboard-black-highlight: #aaaaaa;
 
 $small-breakpoint: 750px;
 $smaller-breakpoint: 497px;
 $leaderboard-width: 90%;
 $ribbon-font-size: 19px;
+$ribbon-hang: 2%;
 $header-font-size: 27px;
 $header-font-size-small: 22px;
 $header-peek: 20px;
 $header-height: 80px;
 $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
 
+$avatar-max-width-s: 70px;
+
 //http://livetools.uiparade.com/ribbon-builder.html#
 .ribbon {
   margin: 0 auto;
-  width: $leaderboard-width+1;
+  width: $leaderboard-width + $ribbon-hang*.75;
   //height: $header-height;
   position: absolute;
   text-align: center;
@@ -53,6 +57,7 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
   bottom: -1em;
   border: 1.5em solid #006400;
   z-index: -2;
+  overflow: hidden;
   }
 .ribbon:before {
   left: -2em;
@@ -61,6 +66,10 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
   -webkit-box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
   -moz-box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
   box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
+  @media screen and (max-width: $small-breakpoint) {
+    transform: translateY(-10px);
+    left: -16px;
+  }
 }
 .ribbon:after {
   right: -2em;
@@ -69,6 +78,10 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
   -webkit-box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
   -moz-box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
   box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
+  @media screen and (max-width: $small-breakpoint) {
+    transform: translateY(-10px);
+    right: -16px;
+  }
 }
 .ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
   border-color: #003200 transparent transparent transparent;
@@ -105,17 +118,20 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
 .leaderboard {
   font-family: $leaderboard-font-stack;
 
-  border: solid 1px black;
+  border: solid 2px black;
   border-radius: .7em;
 
   background-color: $leaderboard-black;
 
   width: $leaderboard-width;
   margin: 0 auto;
+  padding-bottom: 10px;
+
+  box-shadow: rgba(010,010,010,0.3) 0px 0px 4px .5px;
 
   /* The header */
   #leaderboardHeader {
-    margin: $header-peek/2 -.5%;
+    margin: $header-peek/2 (-$ribbon-hang/2);
     height: $header-height + $header-peek/2;
     color: black;
     h1 {
@@ -132,6 +148,11 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
 
     .row:nth-of-type(odd) {
       background-color: #eee;
+      @media screen and (max-width: $small-breakpoint) {
+        img.avatar {
+          border: 1px solid #eee;
+        }
+      }
     }
     .row:nth-of-type(even) {
       background-color: #ccc;
@@ -141,14 +162,30 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
       background-color: white;
       margin: 1px;
 
+      @media screen and (max-width: $small-breakpoint) {
+        height: 80px;
+        margin: 0px 2px 6px 2px;
+      }
+
       img.avatar {
         float: left;
         margin: 1.2em;
-        max-width: 70px;
+        padding: 2px;
+        max-width: 72px;
+        border-radius: 50%;
+        border: dotted 1px $leaderboard-black-highlight;
+        background: $leaderboard-black;
+        box-shadow: rgba(010,010,010,0.3) -1px 1.5px 3px .5px;
 
         @media screen and (max-width: $small-breakpoint) {
-          transform: scale(1);
-          padding: 0;
+          max-width: none;
+          height: 100%;
+          margin: 0px;
+          border-radius: 0%;
+          border: 1px solid #ddd;
+          padding: 1px;
+          /* padding: 0px 1px 1px 1px; */
+          box-shadow: rgba(000,000,000,0.3) 0px 0px 2px .5px;
         }
       }
 
@@ -161,6 +198,22 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
         }
         span.mention {
 
+        }
+
+        @media screen and (max-width: $small-breakpoint) {
+          width: auto;
+          .display {
+            font-size: 14pt;
+            margin: 0;
+          }
+        }
+      }
+      div.age {
+        margin: 0 auto;
+
+        @media screen and (max-width: $small-breakpoint) {
+          margin: 0;
+          float: right;
         }
       }
       div.points {
@@ -177,14 +230,16 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
         }
 
         @media screen and (max-width: $small-breakpoint) {
-          float: none;
-          clear: both;
-          width: 100%;
+          padding: 0px 20px 0px 0px;
+          float: left;
+          display: block;
+          width: auto;
           text-align: left;
-          border-top: solid 1px $fcc-brown;
+          border: none;
 
           h4 {
-            float: left;
+            float: right;
+            margin: 0;
           }
           img.brownie {
             float: right;
@@ -194,10 +249,10 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
     }
 
     .row.first_error {
-      margin-top: 5em;
+      margin-top: 3em;
     }
 
-    .row.error {
+    .row .error {
       color: red;
     }
   }

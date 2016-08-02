@@ -1,9 +1,9 @@
 /*.container-fluid {
   padding: 0;
 }*/
-.nav {
+/*.nav {
   display: inline-block;
-}
+}*/
 #home {
   float: left;
   color: white;
@@ -27,9 +27,28 @@
   margin-top: 8px;
   border-radius: 50%;
 }
-/*.info {
-  left: 90%;
-}*/
+.info a::after {
+  position: absolute;
+  top: 80%;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: rgba(255,255,255,1);
+  content: '';
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.info a:hover::after {
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  transform: translateY(0px);
+}
 .dropdown-menu {
   background-color: gray;
 }
@@ -100,86 +119,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   margin-left: 8%;
   margin-top: 4%;
 }
-/*
-.leaderboard {
-  margin-top : 30px;
+#navFooter{
+  border-radius: 0%;
+  margin: 20px 0px 0px 0px;
 }
-.leaderboard h1 {
-  line-height: 28px;
-  text-align: center;
-}
-#leaderboardHeader {
-  width: 60%;
-  margin: 0 auto;
-}
-.container {
-  width: 60%;
-  margin: 0 auto;
-  padding: 0;
-}
-.row {
-  background-color: #daddda;
-  height: 68px;
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-  margin-top: 2px;
-  text-align: left;
-  border: solid 2px grey;
-}
-.user_info {
-  margin-top: 5px;
-  margin-left: 5%;
-  width: 70%;
-  float:left;
-}
-.display {
-  display: inline;
-}
-.mention {
-  display: inline;
-  margin-left: 5%;
-  font-size: 1.5em;
-}
-.points {
-  margin-left: 20%;
-}
-.points h4 {
-  display: inline-block;
-  margin-top: 5px;
-}
-.brownie {
-  display: inline-block;
-  width: 30px;
-  margin-left: 10%;
-  margin-top: -10px;
-}
-.first_error {
-  margin-top: 15px;
-}
-.error {
-  background-color: #faacac;
-  text-align: center;
-  height: 100%;
-}
-.error h4 {
-  display: inline-block;
-}
-.mostly_transparent {
-  opacity:0.2;
-  filter:alpha(opacity=20);
-}
-.avatar {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  float: left;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  margin: 0px 10px 0px 10px;
-}
-.row h3 {
-  margin: 0 auto;
-}
-*/
