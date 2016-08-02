@@ -114,6 +114,28 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 .middle-container .mid-col {
   padding: 0;
 }
+.contact {
+  padding-right: 15px;
+  text-align: center;
+}
+.contact a {
+  text-decoration: none;
+}
+.contact .logo {
+  width: 70px;
+  border-radius: 7px;
+  margin: 8px;
+  margin-top: 20px;
+  transition: all 0.3s;
+}
+.contact .logo:hover {
+  transform: matrix(1.1, 0, 0, 1.1, 0, -6);
+  transition: all .1s ease-in-out;
+}
+#discord-logo {
+  margin-top: 28px;
+  width: 96.5px;
+}
 .about {
   padding-left: 15px;
   border-left: 10px dotted black;
@@ -134,10 +156,6 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   margin-top: 30px;
   text-align: center;
   width: 70%;
-}
-.contact {
-  /*margin-left: 8%;
-  margin-top: 4%;*/
 }
 #navFooter{
   border-radius: 0%;
