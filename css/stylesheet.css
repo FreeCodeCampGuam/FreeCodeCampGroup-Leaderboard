@@ -32,22 +32,23 @@ body {
 }
 .info a::after {
   position: absolute;
-  top: 80%;
+  top: 76%;
   left: 10%;
   width: 80%;
-  height: 2px;
+  height: 1.5px;
   background: rgba(255,255,255,1);
   content: '';
   -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
   -moz-transition: opacity 0.3s, -moz-transform 0.3s;
-  -webkit-transform: translateY(10px);
-  -moz-transform: translateY(10px);
-  transform: translateY(10px);
+  -webkit-transform: translateY(2px);
+  -moz-transform: translateY(2px);
+  transform: translateY(2px);
   opacity: 0;
   transition: opacity 0.3s, transform 0.3s;
 }
 .info a:hover::after {
   opacity: 1;
+  height: 1.5px;
   -webkit-transform: translateY(0px);
   -moz-transform: translateY(0px);
   transform: translateY(0px);
@@ -106,8 +107,24 @@ body {
 ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
 }
+.middle-container {
+  margin: 40px;
+  margin-bottom: 60px;
+}
+.middle-container .mid-col {
+  padding: 0;
+}
 .about {
-  margin-top: 5%;
+  padding-left: 15px;
+  border-left: 10px dotted black;
+  border-image: url('../images/circle3.svg') 70 round;
+  /*margin-top: 5%;*/
+}
+@media screen and (max-width: 991px) {
+  .about {
+    border: none;
+    padding: 0 7px 0 7px;
+  }
 }
 .about h1 {
   text-align: center;
@@ -119,8 +136,8 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   width: 70%;
 }
 .contact {
-  margin-left: 8%;
-  margin-top: 4%;
+  /*margin-left: 8%;
+  margin-top: 4%;*/
 }
 #navFooter{
   border-radius: 0%;
