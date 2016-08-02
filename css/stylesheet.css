@@ -4,6 +4,9 @@
 /*.nav {
   display: inline-block;
 }*/
+body {
+  overflow-x: hidden;
+}
 #home {
   float: left;
   color: white;
