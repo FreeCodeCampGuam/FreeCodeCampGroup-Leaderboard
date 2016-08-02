@@ -156,7 +156,7 @@ $(document).ready(function() {
   for (let label of ["home","about","contact","leaderboard"]) {
     $("#"+label).click(function() {
       $('html, body').animate({
-        scrollTop: $("."+label).offset().top - 40
+        scrollTop: $("."+label).offset().top - 60
       }, 700);
     });
   }
