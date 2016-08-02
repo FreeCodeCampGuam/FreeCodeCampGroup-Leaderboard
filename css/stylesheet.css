@@ -76,8 +76,8 @@ body {
 #home-background-image {
   /*background-image: url(http://i.imgur.com/UxydDxe.png);*/
   background-image: url("../images/World_map_with_points.svg");
-  background-attachment: fixed;
   background-size: contain;
+  background-attachment: fixed;
   background-position: center 50px;
   background-repeat: no-repeat;
   overflow: hidden;
