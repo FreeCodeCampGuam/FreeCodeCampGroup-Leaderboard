@@ -1,15 +1,15 @@
-.navbar-collapse {
-  background-color: black;
-  width: 100%;
-}
-.nav {
+/*.container-fluid {
+  padding: 0;
+}*/
+/*.nav {
   display: inline-block;
-}
+}*/
 #home {
   float: left;
+  color: white;
+  font-weight: lighter;
   font-size: 30px;
-  font-weight: bold;
-  left: 5%;
+  font-family: "saxmonoregular";
 }
 .nav li a {
   color: white;
@@ -22,15 +22,32 @@
   color: black;
 }
 #logo {
-  border-radius: 50%;
   float: left;
   height: 35px;
-  margin-left: 20px;
   margin-top: 8px;
-  width: 35px;
+  border-radius: 50%;
 }
-.info {
-  left: 90%;
+.info a::after {
+  position: absolute;
+  top: 80%;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: rgba(255,255,255,1);
+  content: '';
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.info a:hover::after {
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  transform: translateY(0px);
 }
 .dropdown-menu {
   background-color: gray;
@@ -38,20 +55,41 @@
 .home {
   width: 100%;
 }
+#top-carousel {
+  color: #f35626;
+  background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+  -webkit-animation: hue 90s infinite linear;
+  height: 500px;
+}
+@keyframes hue {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
 #home-background-image {
-  background-image: url(http://i.imgur.com/UxydDxe.png);
+  /*background-image: url(http://i.imgur.com/UxydDxe.png);*/
+  background-image: url("../images/World_map_with_points.svg");
   background-attachment: fixed;
-  background-position: center center;
-  background-size: cover;
-  height: 675px;
+  background-position: center 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
   overflow: hidden;
+  height: 500px;
+}
+@media screen and (max-width: 750px) {
+  #top-carousel, #home-background-image {
+    height: 200px;
+  }
 }
 .home h3 {
   color: white;
   font-size: 3em;
-  position: absolute;
+  position: relative;
   text-align: center;
-  top: 35%;
+  top: 20%;
   width: 100%
 }
 .home h1 {
@@ -81,86 +119,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   margin-left: 8%;
   margin-top: 4%;
 }
-/*
-.leaderboard {
-  margin-top : 30px;
+#navFooter{
+  border-radius: 0%;
+  margin: 20px 0px 0px 0px;
 }
-.leaderboard h1 {
-  line-height: 28px;
-  text-align: center;
-}
-#leaderboardHeader {
-  width: 60%;
-  margin: 0 auto;
-}
-.container {
-  width: 60%;
-  margin: 0 auto;
-  padding: 0;
-}
-.row {
-  background-color: #daddda;
-  height: 68px;
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-  margin-top: 2px;
-  text-align: left;
-  border: solid 2px grey;
-}
-.user_info {
-  margin-top: 5px;
-  margin-left: 5%;
-  width: 70%;
-  float:left;
-}
-.display {
-  display: inline;
-}
-.mention {
-  display: inline;
-  margin-left: 5%;
-  font-size: 1.5em;
-}
-.points {
-  margin-left: 20%;
-}
-.points h4 {
-  display: inline-block;
-  margin-top: 5px;
-}
-.brownie {
-  display: inline-block;
-  width: 30px;
-  margin-left: 10%;
-  margin-top: -10px;
-}
-.first_error {
-  margin-top: 15px;
-}
-.error {
-  background-color: #faacac;
-  text-align: center;
-  height: 100%;
-}
-.error h4 {
-  display: inline-block;
-}
-.mostly_transparent {
-  opacity:0.2;
-  filter:alpha(opacity=20);
-}
-.avatar {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  float: left;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  margin: 0px 10px 0px 10px;
-}
-.row h3 {
-  margin: 0 auto;
-}
-*/

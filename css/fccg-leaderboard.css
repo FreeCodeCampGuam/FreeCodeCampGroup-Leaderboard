@@ -1,37 +1,165 @@
+.ribbon {
+  margin: 0 auto;
+  width: 91.5%;
+  position: absolute;
+  text-align: center;
+  font-size: 27px !important;
+  background: #208a20;
+  background: -webkit-gradient(linear, left top, left bottom, from(#208a20), to(#024B02));
+  background: -webkit-linear-gradient(top, #208a20, #024B02);
+  background: -moz-linear-gradient(top, #208a20, #024B02);
+  background: -ms-linear-gradient(top, #208a20, #024B02);
+  background: -o-linear-gradient(top, #208a20, #024B02);
+  background-image: -ms-linear-gradient(top, #208a20 0%, #024B02 100%);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
+  font-family: 'Helvetica Neue',Helvetica, sans-serif; }
+
+.ribbon h1 {
+  font-size: 27px !important;
+  color: #002E00 !important;
+  text-shadow: #29A127 0 1px 0;
+  margin: 0px;
+  padding: 21.5px 10px; }
+
+@media screen and (max-width: 497px) {
+  .ribbon h1 {
+    padding: 7.5px; } }
+.ribbon:before, .ribbon:after {
+  content: '';
+  position: absolute;
+  display: block;
+  bottom: -1em;
+  border: 1.5em solid #006400;
+  z-index: -2;
+  overflow: hidden; }
+
+.ribbon:before {
+  left: -2em;
+  border-right-width: 1.5em;
+  border-left-color: transparent;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+  box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px; }
+  @media screen and (max-width: 750px) {
+    .ribbon:before {
+      transform: translateY(-10px);
+      left: -16px; } }
+
+.ribbon:after {
+  right: -2em;
+  border-left-width: 1.5em;
+  border-right-color: transparent;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) -1px 1px 1px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) -1px 1px 1px;
+  box-shadow: rgba(0, 0, 0, 0.4) -1px 1px 1px; }
+  @media screen and (max-width: 750px) {
+    .ribbon:after {
+      transform: translateY(-10px);
+      right: -16px; } }
+
+.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+  border-color: #003200 transparent transparent transparent;
+  position: absolute;
+  display: block;
+  border-style: solid;
+  bottom: -1em;
+  content: '';
+  z-index: -1; }
+
+.ribbon .ribbon-content:before {
+  left: 0;
+  border-width: 1em 0 0 1em; }
+
+.ribbon .ribbon-content:after {
+  right: 0;
+  border-width: 1em 1em 0 0; }
+
+.ribbon-stitches-top {
+  margin-top: 2px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5); }
+
+.ribbon-stitches-bottom {
+  margin-bottom: 2px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3); }
+
 .leaderboard {
   font-family: Helvetica, Arial, sans-serif;
-  border: solid 1px black;
-  border-radius: 1em;
-  background-color: #330000;
+  border: solid 2px black;
+  border-radius: .7em;
+  background-color: #202020;
   width: 90%;
   margin: 0 auto;
+  padding-bottom: 10px;
+  box-shadow: rgba(10, 10, 10, 0.3) 0px 0px 4px 0.5px;
   /* The header */ }
-  .leaderboard #leaderboardHeader h1 {
-    text-align: center;
-    font-size: 16pt;
-    color: white; }
+  .leaderboard #leaderboardHeader {
+    margin: 10px -1%;
+    height: 90px;
+    color: black; }
+    .leaderboard #leaderboardHeader h1 {
+      text-align: center;
+      font-size: 16pt;
+      color: white; }
   .leaderboard .container {
     width: 100%;
     padding: 0;
     margin: 0; }
     .leaderboard .container .row:nth-of-type(odd) {
       background-color: #eee; }
+      @media screen and (max-width: 750px) {
+        .leaderboard .container .row:nth-of-type(odd) img.avatar {
+          border: 1px solid #eee; } }
     .leaderboard .container .row:nth-of-type(even) {
       background-color: #ddd; }
     .leaderboard .container .row {
       background-color: white;
       margin: 1px; }
+      @media screen and (max-width: 750px) {
+        .leaderboard .container .row {
+          height: 80px;
+          margin: 0px 2px 6px 2px; } }
       .leaderboard .container .row img.avatar {
         float: left;
         margin: 1.2em;
-        max-width: 100px; }
+        padding: 2px;
+        max-width: 72px;
+        border-radius: 50%;
+        border: dotted 1px #aaaaaa;
+        background: #202020;
+        box-shadow: rgba(10, 10, 10, 0.3) -1px 1.5px 3px 0.5px; }
         @media screen and (max-width: 750px) {
           .leaderboard .container .row img.avatar {
-            transform: scale(1);
-            padding: 0; } }
+            max-width: none;
+            height: 100%;
+            margin: 0px;
+            border-radius: 0%;
+            border: 1px solid #ddd;
+            padding: 1px;
+            /* padding: 0px 1px 1px 1px; */
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 2px 0.5px; } }
       .leaderboard .container .row div.user_info {
         float: left;
         width: 45%; }
+        @media screen and (max-width: 750px) {
+          .leaderboard .container .row div.user_info {
+            width: auto; }
+            .leaderboard .container .row div.user_info .display {
+              font-size: 14pt;
+              margin: 0; } }
+      .leaderboard .container .row div.age {
+        margin: 0 auto; }
+        @media screen and (max-width: 750px) {
+          .leaderboard .container .row div.age {
+            margin: 0;
+            float: right; } }
       .leaderboard .container .row div.points {
         float: right;
         width: 35%;
@@ -41,18 +169,20 @@
           width: 30px; }
         @media screen and (max-width: 750px) {
           .leaderboard .container .row div.points {
-            float: none;
-            clear: both;
-            width: 100%;
+            padding: 0px 20px 0px 0px;
+            float: left;
+            display: block;
+            width: auto;
             text-align: left;
-            border-top: solid 1px #330000; }
+            border: none; }
             .leaderboard .container .row div.points h4 {
-              float: left; }
+              float: right;
+              margin: 0; }
             .leaderboard .container .row div.points img.brownie {
               float: right; } }
     .leaderboard .container .row.first_error {
-      margin-top: 5em; }
-    .leaderboard .container .row.error {
+      margin-top: 3em; }
+    .leaderboard .container .row .error {
       color: red; }
 
 /*# sourceMappingURL=fccg-leaderboard.css.map */

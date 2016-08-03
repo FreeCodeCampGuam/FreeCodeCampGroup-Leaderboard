@@ -1,6 +1,6 @@
-var arrayOfUsernames = [];
+var arrayOfCampers = [];
+var dateThreshold = new Date(2015,5,1);  // change this via user-input
 var ranks = [0,50,100,200,300,400];  // probably want to increase these later
-
 // updates the camper's brownie 'rank'
 // notice, rank can be 0. returns false if that's the case
 function updateRank(camper) {
@@ -14,6 +14,23 @@ function updateRank(camper) {
   }
   camper.rank = rank;
   return rank !== 0;
+}
+function updateAge(camper) {
+  camper.daysOld = dateToAge(camper.created)
+}
+
+function dateToAge(date) {
+  return daysBetween(date, Date.now())
+}
+// http://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
+function treatAsUTC(date) {
+  var result = new Date(date);
+  result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+  return result;
+}
+function daysBetween(startDate, endDate) {
+  var millisecondsPerDay = 24 * 60 * 60 * 1000;
+  return Math.round((treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay);
 }
 
 function apiRequests() {
@@ -30,16 +47,17 @@ function apiRequests() {
     success: function(gitterData) {
       // console.log(gitterData);
       gitterData.forEach(function(object, i) {
-        $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
+        // $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
         var camper = {
           "display" : object.displayName,
           "username" : object.username,
           "points" : -1,
           "rank" : 0,
           "avatar" : null,
-          "created" : null
+          "created" : null,
+          "daysOld" : null
         };
-        arrayOfUsernames.push(camper);
+        arrayOfCampers.push(camper);
         $.ajax({
           url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username.toLowerCase(),
           async: true,
@@ -62,7 +80,7 @@ function apiRequests() {
           method: 'GET',
           dataType: 'json',
           success: function(hubData) {
-            updateCamper({"username" : object.username, "avatar" : hubData.avatar_url, "created" : hubData.created_at});
+            updateCamper({"username" : object.username, "avatar" : hubData.avatar_url, "created" : new Date(hubData.created_at)});
             //camper.push(hubData.created_at)
           },
           error: function() {
@@ -70,7 +88,7 @@ function apiRequests() {
           }
         });
         /*console.log(camper)
-        arrayOfUsernames.push(camper)*/
+        arrayOfCampers.push(camper)*/
       });
     },
     error: function() {
@@ -80,22 +98,27 @@ function apiRequests() {
 }
 
 function updateCamper(camper) {
-  for (let c of arrayOfUsernames) {  // is there a quicker find?
+  for (let c of arrayOfCampers) {  // is there a quicker find?
     if (c.username === camper.username) {
       for (let prop in camper) {
         c[prop] = camper[prop];
       }
       updateRank(c);  // maybe this should be a method of the camper class
+      updateAge(c);
       break;
     }
   }
   console.log(camper)
-  arrayOfUsernames.sort(function(a, b) {
+  arrayOfCampers.sort(function(a, b) {
     return b.points - a.points;
   });
+  var filteredUsers = arrayOfCampers.filter(aCamper => aCamper.created > dateThreshold)
 
+  //$('.leaderboard > .container').html('<div>Displaying Users that joined within '+dateToAge(dateThreshold)+' days</div>')
+  $('.leaderboard > .container').html('');
   var found = false;
-  arrayOfUsernames.forEach(function(user, i) {
+  filteredUsers.forEach(function(user, i) {
+    $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
     if (user.points < 0 && !found) {
       $('#place'+(i+1)).addClass('first_error');
       found = true;
@@ -107,13 +130,20 @@ function updateCamper(camper) {
   });
 }
 function _displayCamper(place, camper) {
-  var img = '<img class="avatar mostly_transparent" src="images/favicons/favicon.ico" alt="" />'; // insert no-avatar image here
+  // avatar
+  var img = '<img class="avatar mostly_transparent" src="images/favicons/android-chrome-192x192.png" alt="" />'; // insert no-avatar image here
   if (camper.avatar !== null) {
     img = '<img class="avatar" src="'+camper.avatar+'" alt="" />';
   }
-  $('#place'+place).html(img + '<div class="user_info"><h3 class="display">' + camper.display + '</h3><span class="mention">@' + camper.username + '</span></div>');
+  $('#place'+place).html(img + '<div class="user_info"><h3 class="display">'+camper.display+'</h3>'+
+      '<span class="mention">@' + camper.username + '</span></div>');
+
+  // age
+  $('#place'+place).append('<div class="age col2">Joined '+camper.daysOld+' days ago.</div>')
   if (camper.points >= 0) {
-    $('#place'+place).append('<div class="points"><h4>Brownie Points: '+camper.points+'</h4><img class="brownie" src="images/ranks/brownie'+camper.rank+'.png" alt="rank'+camper.rank+'"/></div>');
+    $('#place'+place).append('<div class="points"><h4>Brownie Points: '+camper.points+'</h4>'+
+        '<img class="brownie" src="images/ranks/brownie'+camper.rank+'.png" alt="rank'+camper.rank+'"/>'+
+        '</div>');
   }
   else {
     $('#place'+place).append('<div class="error"><h4>Account not linked to freeCodeCamp</h4></div>');

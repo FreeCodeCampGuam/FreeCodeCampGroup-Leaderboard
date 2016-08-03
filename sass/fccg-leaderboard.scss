@@ -1,21 +1,139 @@
 $leaderboard-font-stack: Helvetica, Arial, sans-serif;
-$leaderboard-color-brown: #330000;
+$fcc-brown: #330000;
+$fcc-green: #006700;
+$fcc-font: "saxmonoregular";
+$leaderboard-black: #202020;
+$leaderboard-black-highlight: #aaaaaa;
 
 $small-breakpoint: 750px;
+$smaller-breakpoint: 497px;
+$leaderboard-width: 90%;
+$ribbon-font-size: 19px;
+$ribbon-hang: 2%;
+$header-font-size: 27px;
+$header-font-size-small: 22px;
+$header-peek: 20px;
+$header-height: 80px;
+$header-h1-padding: ($header-height - $header-font-size - 10px)/2;
+
+$avatar-max-width-s: 70px;
+
+//http://livetools.uiparade.com/ribbon-builder.html#
+.ribbon {
+  margin: 0 auto;
+  width: $leaderboard-width + $ribbon-hang*.75;
+  //height: $header-height;
+  position: absolute;
+  text-align: center;
+  font-size: $header-font-size !important;
+  background: #208a20;
+  background: -webkit-gradient(linear, left top, left bottom, from(#208a20), to(#024B02));
+  background: -webkit-linear-gradient(top, #208a20, #024B02);
+  background: -moz-linear-gradient(top, #208a20, #024B02);
+  background: -ms-linear-gradient(top, #208a20, #024B02);
+  background: -o-linear-gradient(top, #208a20, #024B02);
+  background-image: -ms-linear-gradient(top, #208a20 0%, #024B02 100%);
+  -webkit-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+  -moz-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+  box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+  font-family: 'Helvetica Neue',Helvetica, sans-serif;
+}
+.ribbon h1 {
+  font-size: 27px!important;
+  color: #002E00!important;
+  text-shadow: #29A127 0 1px 0;
+  margin:0px;
+  padding: $header-h1-padding 10px;
+}
+@media screen and (max-width: $smaller-breakpoint) {
+  .ribbon h1 {
+    padding: 7.5px;
+  }
+}
+.ribbon:before, .ribbon:after {
+  content: '';
+  position: absolute;
+  display: block;
+  bottom: -1em;
+  border: 1.5em solid #006400;
+  z-index: -2;
+  overflow: hidden;
+  }
+.ribbon:before {
+  left: -2em;
+  border-right-width: 1.5em;
+  border-left-color: transparent;
+  -webkit-box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
+  -moz-box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
+  box-shadow: rgba(000,000,000,0.4) 1px 1px 1px;
+  @media screen and (max-width: $small-breakpoint) {
+    transform: translateY(-10px);
+    left: -16px;
+  }
+}
+.ribbon:after {
+  right: -2em;
+  border-left-width: 1.5em;
+  border-right-color: transparent;
+  -webkit-box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
+  -moz-box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
+  box-shadow: rgba(000,000,000,0.4) -1px 1px 1px;
+  @media screen and (max-width: $small-breakpoint) {
+    transform: translateY(-10px);
+    right: -16px;
+  }
+}
+.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+  border-color: #003200 transparent transparent transparent;
+  position: absolute;
+  display: block;
+  border-style: solid;
+  bottom: -1em;
+  content: '';
+  z-index: -1;
+}
+.ribbon .ribbon-content:before {
+  left: 0;
+  border-width: 1em 0 0 1em;
+}
+.ribbon .ribbon-content:after {
+  right: 0;
+  border-width: 1em 1em 0 0;
+}
+.ribbon-stitches-top {
+  margin-top:2px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
+}
+.ribbon-stitches-bottom {
+  margin-bottom:2px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3);
+}
 
 .leaderboard {
   font-family: $leaderboard-font-stack;
 
-  border: solid 1px black;
-  border-radius: 1em;
+  border: solid 2px black;
+  border-radius: .7em;
 
-  background-color: $leaderboard-color-brown;
+  background-color: $leaderboard-black;
 
-  width: 90%;
+  width: $leaderboard-width;
   margin: 0 auto;
+  padding-bottom: 10px;
+
+  box-shadow: rgba(010,010,010,0.3) 0px 0px 4px .5px;
 
   /* The header */
   #leaderboardHeader {
+    margin: $header-peek/2 (-$ribbon-hang/2);
+    height: $header-height + $header-peek/2;
+    color: black;
     h1 {
       text-align: center;
       font-size: 16pt;
@@ -25,11 +143,16 @@ $small-breakpoint: 750px;
 
   .container {
     width: 100%;
-    padding: 0; 
+    padding: 0;
     margin: 0;
 
     .row:nth-of-type(odd) {
       background-color: #eee;
+      @media screen and (max-width: $small-breakpoint) {
+        img.avatar {
+          border: 1px solid #eee;
+        }
+      }
     }
     .row:nth-of-type(even) {
       background-color: #ddd;
@@ -37,16 +160,32 @@ $small-breakpoint: 750px;
 
     .row {
       background-color: white;
-      margin: 1px; 
+      margin: 1px;
+
+      @media screen and (max-width: $small-breakpoint) {
+        height: 80px;
+        margin: 0px 2px 6px 2px;
+      }
 
       img.avatar {
         float: left;
         margin: 1.2em;
-        max-width: 100px;
+        padding: 2px;
+        max-width: 72px;
+        border-radius: 50%;
+        border: dotted 1px $leaderboard-black-highlight;
+        background: $leaderboard-black;
+        box-shadow: rgba(010,010,010,0.3) -1px 1.5px 3px .5px;
 
         @media screen and (max-width: $small-breakpoint) {
-          transform: scale(1);
-          padding: 0;
+          max-width: none;
+          height: 100%;
+          margin: 0px;
+          border-radius: 0%;
+          border: 1px solid #ddd;
+          padding: 1px;
+          /* padding: 0px 1px 1px 1px; */
+          box-shadow: rgba(000,000,000,0.3) 0px 0px 2px .5px;
         }
       }
 
@@ -60,9 +199,25 @@ $small-breakpoint: 750px;
         span.mention {
 
         }
+
+        @media screen and (max-width: $small-breakpoint) {
+          width: auto;
+          .display {
+            font-size: 14pt;
+            margin: 0;
+          }
+        }
+      }
+      div.age {
+        margin: 0 auto;
+
+        @media screen and (max-width: $small-breakpoint) {
+          margin: 0;
+          float: right;
+        }
       }
       div.points {
-        float: right; 
+        float: right;
         width: 35%;
         text-align: right;
         padding: 5px 20px;
@@ -75,14 +230,16 @@ $small-breakpoint: 750px;
         }
 
         @media screen and (max-width: $small-breakpoint) {
-          float: none;
-          clear: both;
-          width: 100%;
+          padding: 0px 20px 0px 0px;
+          float: left;
+          display: block;
+          width: auto;
           text-align: left;
-          border-top: solid 1px $leaderboard-color-brown;
+          border: none;
 
           h4 {
-            float: left;
+            float: right;
+            margin: 0;
           }
           img.brownie {
             float: right;
@@ -92,10 +249,10 @@ $small-breakpoint: 750px;
     }
 
     .row.first_error {
-      margin-top: 5em;
+      margin-top: 3em;
     }
 
-    .row.error {
+    .row .error {
       color: red;
     }
   }
