@@ -109,12 +109,16 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 }
 .middle-container {
   margin: 40px;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
+}
+.middle-container p {
+  /* different font? */
 }
 .middle-container .mid-col {
   padding: 0;
 }
 .contact {
+  margin-bottom: 60px;
   padding-right: 15px;
   text-align: center;
 }
@@ -126,15 +130,63 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   border-radius: 7px;
   margin: 8px;
   margin-top: 20px;
-  transition: all 0.3s;
+  -webkit-filter: drop-shadow(1px 1.5px 1px rgba(0,0,0,0.3));
+  /*filter: url(shadow.svg#drop-shadow);*/
+  transition: all 0.2s;
 }
 .contact .logo:hover {
-  transform: matrix(1.1, 0, 0, 1.1, 0, -6);
-  transition: all .1s ease-in-out;
+  box-shadow: 0px 4.5px 3px 0px rgba(0,0,0,0.2);
+  transform: matrix(1.1, 0, 0, 1.1, 0, -9);
+  /*-webkit-filter: drop-shadow(0px 4px 3px rgba(0,0,0,0.2));*/
+  /*filter: url(shadow.svg#drop-shadow);*/
+
+  transition: all .11s ease-in-out;
+}
+.logo-link {
+  display: inline-block;
+  height: 100px;
+  position: relative;
+}
+.logo-link::after {
+  position: absolute;
+  top: 100%;
+  width: 90px;
+  height: 20px;
+  background-repeat: no-repeat;
+  content: '';
+  transform: translateY(-1px);
+  opacity: 0;
+  transition: all .3s ease-in-out;
+}
+.logo-link:hover::after {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: all .7s ease-in-out;
 }
 #discord-logo {
   margin-top: 28px;
   width: 96.5px;
+}
+#discord-logo:hover {
+  box-shadow: none;
+  transform: matrix(1.1, 0, 0, 1.1, 0, -6);
+  -webkit-filter: drop-shadow(0px 4px 3px rgba(0,0,0,0.3));
+}
+#gitter-link::after {
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/2/2f/Gitter_logo.png');
+  background-size: 90px auto;
+  left: -5%;
+}
+#discord-link::after {
+  background-image: url('https://discordapp.com/assets/9babbea9acbfec5302d832bae6c3c184.svg');
+  top: 117%;
+  left: 11.5%;
+  /*-webkit-filter: drop-shadow(0px 1px .5px rgba(0,0,0,0.1));*/
+}
+#facebook-link::after {
+  background-image: url('https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_find_us_on_facebook_badge/SgmejgknvwdHwcb7Ofu6/FB-FindUsonFacebook-online-1024.png');
+  background-size: 90px auto;
+  left: 2%;
 }
 .about {
   padding-left: 15px;
