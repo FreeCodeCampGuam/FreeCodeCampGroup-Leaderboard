@@ -1,5 +1,5 @@
 var arrayOfCampers = [];
-var dateThreshold = new Date(2015,5,1);  // change this via user-input
+var dateThreshold = new Date(2000,5,1);  // change this via user-input
 var ranks = [0,50,100,200,300,400];  // probably want to increase these later
 // updates the camper's brownie 'rank'
 // notice, rank can be 0. returns false if that's the case
@@ -18,7 +18,6 @@ function updateRank(camper) {
 function updateAge(camper) {
   camper.daysOld = dateToAge(camper.created)
 }
-
 function dateToAge(date) {
   return daysBetween(date, Date.now())
 }
@@ -96,7 +95,19 @@ function apiRequests() {
     }
   });
 }
-
+function updateDateFilter() {
+  console.log('updating date.');
+/*  for (let stuff in $('#age-filter-selector')) {
+    console.log(stuff);
+    console.log($('#age-filter-selector')[stuff]);
+  }*/
+  console.log($('#age-filter-selector').val());
+  dateThreshold = new Date($('#age-filter-selector').val());
+  //dateThreshold = new Date($('#age-filter-selector').value);
+  //console.log($('#age-filter-selector').value);
+  //console.log(dateThreshold);
+  updateCamper(arrayOfCampers[0]);  // we need to rewrite updateCamper
+}
 function updateCamper(camper) {
   for (let c of arrayOfCampers) {  // is there a quicker find?
     if (c.username === camper.username) {
@@ -113,7 +124,8 @@ function updateCamper(camper) {
     return b.points - a.points;
   });
   var filteredUsers = arrayOfCampers.filter(aCamper => aCamper.created > dateThreshold)
-
+  console.log('filtered users:');
+  console.log(filteredUsers);
   //$('.leaderboard > .container').html('<div>Displaying Users that joined within '+dateToAge(dateThreshold)+' days</div>')
   $('.leaderboard > .container').html('');
   var found = false;

@@ -5,6 +5,9 @@ $fcc-font: "saxmonoregular";
 $leaderboard-black: #202020;
 $leaderboard-black-highlight: #aaaaaa;
 
+$even-color: #ccc;
+$odd-color: #eee;
+
 $small-breakpoint: 750px;
 $smaller-breakpoint: 497px;
 $leaderboard-width: 90%;
@@ -19,6 +22,7 @@ $header-h1-padding: ($header-height - $header-font-size - 10px)/2;
 $avatar-max-width-s: 70px;
 
 //http://livetools.uiparade.com/ribbon-builder.html#
+// Ribbons galore
 .ribbon {
   margin: 0 auto;
   width: $leaderboard-width + $ribbon-hang*.75;
@@ -139,14 +143,65 @@ $avatar-max-width-s: 70px;
       color: white;
     }
   }
+  // Hidden input stuffs. put other sorts here later?
+  #header-panel {
+    position: relative;
+    top: -5%;
+    height: 20px;
+    width: 100%;
+    padding: inherit;
+    margin: inherit;
+    border: 1px solid $leaderboard-black;
+    transform: matrix(1,0,0,1,0,0);
+    transition: all .4s ease-in-out;
+  }
+  #header-panel:hover {
+    height: 40px;
+    top: 10%;
+    border: 1px solid black;
+    border-top: none;
+    height: 40px;
+    transform: matrix(1,0,0,1,0,0);
+    transition: all .2s ease-in-out;
 
+    background: $even-color + #040404;
+  }
+  #header-panel div {
+    height: inherit;
+    opacity: 0;
+    transition: all .2s ease-in-out, opacity .1s ease-in-out;
+  }
+  #header-panel div:hover {
+    border: 4px dotted $leaderboard-black;
+    box-shadow: inset 0px 1px 1px -1px black;
+    border-bottom: none;
+    border-top: none;
+    opacity: 1;
+    transition: all .4s ease-in-out, opacity .6s ease-in-out;
+  }
+  #age-filter {
+    margin: 0 auto;
+    position: relative;
+    top: 19%;
+    width: 50%;
+  }
+  #age-filter-label {
+    float: right;
+  }
+  #age-filter-selector {
+    float: right;
+    border-radius: 3px;
+    outline: none;
+    margin: 0 auto;
+    border: 1px solid grey;
+  }
   .container {
     width: 100%;
     padding: 0;
     margin: 0;
 
     .row:nth-of-type(odd) {
-      background-color: #eee;
+      background-color: $odd-color;
       @media screen and (max-width: $small-breakpoint) {
         img.avatar {
           border: 1px solid #eee;
@@ -154,12 +209,13 @@ $avatar-max-width-s: 70px;
       }
     }
     .row:nth-of-type(even) {
-      background-color: #ccc;
+      background-color: $even-color;
     }
 
     .row {
       background-color: white;
       margin: 1px;
+      /* -webkit-animation: stuff 1s ease; */
 
       @media screen and (max-width: $small-breakpoint) {
         height: 80px;
@@ -254,5 +310,15 @@ $avatar-max-width-s: 70px;
     .row .error {
       color: red;
     }
+  }
+}
+@keyframes stuff {  // add entrance animations to rows later?
+  0% {
+    transform: scaleY(-1);
+    filter: blur(2px);
+  }
+  100% {
+    transform: scaleY(1);
+    filter: blur(0);
   }
 }

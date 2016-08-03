@@ -118,6 +118,14 @@
     <div id="leaderboardHeader" class="row">
       <div class="ribbon"><div class="ribbon-stitches-top"></div><strong class="ribbon-content"><h1>FreeCodeCampGuam Leaderboard</h1></strong><div class="ribbon-stitches-bottom"></div></div>
     </div>
+    <div class="row" id="header-panel">
+      <div id="age-filter-label" class="col-md-12">
+        <form action="updateDateFilter()" id="age-filter">
+          <label for="age-filter">Displaying members that joined after: </label>
+          <input type="date" id="age-filter-selector" onchange="updateDateFilter()">
+        </form>
+      </div>
+    </div>
     <div class="container"></div>
   </div>
 <!--FOOTER START-->

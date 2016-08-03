@@ -179,13 +179,15 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 }
 #discord-link::after {
   background-image: url('https://discordapp.com/assets/9babbea9acbfec5302d832bae6c3c184.svg');
-  top: 117%;
-  left: 11.5%;
+  top: 118%;
+  left: 11.2%;
+  height: 30px;
   /*-webkit-filter: drop-shadow(0px 1px .5px rgba(0,0,0,0.1));*/
 }
 #facebook-link::after {
   background-image: url('https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_find_us_on_facebook_badge/SgmejgknvwdHwcb7Ofu6/FB-FindUsonFacebook-online-1024.png');
   background-size: 90px auto;
+  top: 104%;
   left: 2%;
 }
 .about {
