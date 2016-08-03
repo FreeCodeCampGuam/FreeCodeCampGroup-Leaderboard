@@ -122,6 +122,9 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   padding-right: 15px;
   text-align: center;
 }
+.contact p {
+  margin-bottom: 20px;
+}
 .contact a {
   text-decoration: none;
 }
