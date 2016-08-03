@@ -135,7 +135,7 @@ $avatar-max-width-s: 70px;
   /* The header */
   #leaderboardHeader {
     margin: $header-peek/2 (-$ribbon-hang/2);
-    height: $header-height + $header-peek/2;
+    height: $header-height + 2px;
     color: black;
     h1 {
       text-align: center;
