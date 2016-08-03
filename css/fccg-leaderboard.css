@@ -117,7 +117,7 @@
         .leaderboard .container .row:nth-of-type(odd) img.avatar {
           border: 1px solid #eee; } }
     .leaderboard .container .row:nth-of-type(even) {
-      background-color: #ddd; }
+      background-color: #ccc; }
     .leaderboard .container .row {
       background-color: white;
       margin: 1px; }
