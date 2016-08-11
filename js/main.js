@@ -35,63 +35,63 @@ function daysBetween(startDate, endDate) {
 function apiRequests() {
   $.ajax({
     async: false,
-    url: 'https://api.gitter.im/v1/rooms/56f9df0785d51f252abb4f57/users?limit=300',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      Authorization: 'Bearer 4277caf3b83c61142f47eef26b0bd41786285ae9'
-    },
+    url: 'api.json',
     method: 'GET',
     dataType: 'json',
-    success: function(gitterData) {
-      // console.log(gitterData);
-      gitterData.forEach(function(object, i) {
-        // $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
-        var camper = {
-          "display" : object.displayName,
-          "username" : object.username,
-          "points" : -1,
-          "rank" : 0,
-          "avatar" : null,
-          "created" : null,
-          "daysOld" : null
-        };
+    success: function(data) {
+      for (var camper in data.campers) {
         arrayOfCampers.push(camper);
-        $.ajax({
-          url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username.toLowerCase(),
-          async: true,
-          method: 'GET',
-          dataType: 'json',
-          success: function(fccData) {
-            updateCamper({"username" : object.username, "points" : fccData.about.browniePoints});  // removed about.username cause we need to find users later by unique value
-            // not sure if displayName is unique. object.username should be though. if we use object and about.username, might be differences
-            //camper.concat([fccData.about.username, fccData.about.browniePoints]);
-          },
-          error: function() {
-            updateCamper({"username" : object.username, "points" : -2});  // shrug*
-            //camper.concat([object.username, null]);
-          }
-        });
-        // Github call to get 'join' date. assuming joined github at same time
-        $.ajax({
-          url: 'https://api.github.com/users/' + object.username,
-          async: true,
-          method: 'GET',
-          dataType: 'json',
-          success: function(hubData) {
-            updateCamper({"username" : object.username, "avatar" : hubData.avatar_url, "created" : new Date(hubData.created_at)});
-            //camper.push(hubData.created_at)
-          },
-          error: function() {
-            console.log('github request error on user: ' + object.username);
-          }
-        });
-        /*console.log(camper)
-        arrayOfCampers.push(camper)*/
-      });
+        updateCamper({"username" : camper.username, "points" : data.fccData.browniePoints});
+        updateCamper({"username" : camper.username, "avatar" : hubData.avatar_url, "created" : new Date(hubData.created_at)});
+      }
+      // // console.log(gitterData);
+      // gitterData.forEach(function(object, i) {
+      //   // $('.leaderboard > .container').append('<div class="row" id="place'+(i+1)+'"></div>');
+      //   var camper = {
+      //     "display" : object.displayName,
+      //     "username" : object.username,
+      //     "points" : -1,
+      //     "rank" : 0,
+      //     "avatar" : null,
+      //     "created" : null,
+      //     "daysOld" : null
+      //   };
+      //   arrayOfCampers.push(camper);
+      //   $.ajax({
+      //     url: 'https://www.freecodecamp.com/api/users/about?username=' + object.username.toLowerCase(),
+      //     async: true,
+      //     method: 'GET',
+      //     dataType: 'json',
+      //     success: function(fccData) {
+      //       updateCamper({"username" : object.username, "points" : fccData.about.browniePoints});  // removed about.username cause we need to find users later by unique value
+      //       // not sure if displayName is unique. object.username should be though. if we use object and about.username, might be differences
+      //       //camper.concat([fccData.about.username, fccData.about.browniePoints]);
+      //     },
+      //     error: function() {
+      //       updateCamper({"username" : object.username, "points" : -2});  // shrug*
+      //       //camper.concat([object.username, null]);
+      //     }
+      //   });
+      //   // Github call to get 'join' date. assuming joined github at same time
+      //   $.ajax({
+      //     url: 'https://api.github.com/users/' + object.username,
+      //     async: true,
+      //     method: 'GET',
+      //     dataType: 'json',
+      //     success: function(hubData) {
+      //       updateCamper({"username" : object.username, "avatar" : hubData.avatar_url, "created" : new Date(hubData.created_at)});
+      //       //camper.push(hubData.created_at)
+      //     },
+      //     error: function() {
+      //       console.log('github request error on user: ' + object.username);
+      //     }
+      //   });
+      //   /*console.log(camper)
+      //   arrayOfCampers.push(camper)*/
+      // });
     },
     error: function() {
-      console.log('Gitter API failed.');
+      console.log('Could not load JSON file.');
     }
   });
 }
