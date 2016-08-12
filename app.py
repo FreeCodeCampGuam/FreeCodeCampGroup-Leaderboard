@@ -39,4 +39,4 @@ if __name__ == "__main__":
 	logging.info("starting worker")
 	sub = subprocess.Popen(['python3', 'utils/worker.py'])
 	logging.info(str(sub))
-	app.run(host="0.0.0.0", port=5000)
+	# app.run(host="0.0.0.0", port=5000)
