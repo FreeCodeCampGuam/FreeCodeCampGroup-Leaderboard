@@ -20,6 +20,7 @@
   <!-- <link rel="manifest" href="images/favicons/manifest.json"> -->
   <!-- <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5"> -->
   <meta name="theme-color" content="#ffffff">
+  <script type="text/javascript" src="api.json"></script>
 </head>
 
 <body>
@@ -46,16 +47,6 @@
           <li class="info">
             <a id="leaderboard" href="#">Leaderboard</a>
           </li>
-<!--           <li class="dropdown info">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Leaderboard <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Search</a></li>
-              <li><a href="#">List</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Add</a></li>
-              <li><a href="#">Join</a></li>
-            </ul>
-          </li> -->
         </ul>
       </div>
     </div>
@@ -151,5 +142,16 @@
     </nav>
 </footer>
 <!--FOOTER END-->
+<script type="text/javascript">
+  $(document).ready(function() {
+    console.log(apiData);
+    console.log(apiData.CAMPERS['123itslee']);
+    for (var camper in apiData.CAMPERS) {
+      arrayOfCampers.push(apiData.CAMPERS[camper]);
+      updateCamper({"username" : apiData.CAMPERS[camper].username, "points" : apiData.CAMPERS[camper].points});
+      updateCamper({"username" : apiData.CAMPERS[camper].username, "avatar" : apiData.CAMPERS[camper].avatar, "created" : new Date(apiData.CAMPERS[camper].created)});
+    }
+  });
+</script>
 </body>
 </html>
