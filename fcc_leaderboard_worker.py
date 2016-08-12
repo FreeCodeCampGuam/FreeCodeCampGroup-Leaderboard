@@ -212,6 +212,8 @@ def still_ratelimited():
 	if time.time() > _api_output["GITHUB_RATELIMIT_RESET"]:
 		_api_output["GITHUB_RATELIMIT_RESET"] = None
 		save_json(_api, _api_output)
+		return False
+	return True
 
 # should hand rate limits in here since we get the json here..
 async def get_api(url, headers=None):
