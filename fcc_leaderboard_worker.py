@@ -5,6 +5,15 @@ import aiohttp
 import datetime
 import logging
 import time
+import subprocess
+import sys
+
+
+sub = subprocess.Popen(['ps', '-ef'], stdout=subprocess.PIPE)
+out = sub.communicate()
+if out[0].decode("utf-8").count("fcc_leaderboard_worker.py") > 1:
+	print('script already running')
+	sys.exit()
 
 settings = read_json('settings.json')
 rates = settings['REFRESH_RATES']
@@ -18,6 +27,7 @@ empty_api = {
 		"FCC_ABOUT" : None,
 		"GITTER" : None
 	},
+	"GITHUB_RATELIMIT_RESET" : None,
 	"CAMPERS" : {}
 }
 if os.path.isfile(_api):
@@ -27,17 +37,17 @@ else:
 	save_json(_api, _api_output)
 
 
-checks = {
-	'GITTER' : {
-		"URL" : "https://api.gitter.im/v1/rooms/56f9df0785d51f252abb4f57/users?limit=",
-	},
-	'FCC_ABOUT' : {
-		"URL" : "https://www.freecodecamp.com/api/users/about?username="
-	},
-	'GITHUB' : {
-		"URL" : "https://api.github.com/users/"
-	}
-}
+# checks = {
+# 	'GITTER' : {
+# 		"URL" : "https://api.gitter.im/v1/rooms/56f9df0785d51f252abb4f57/users?limit=",
+# 	},
+# 	'FCC_ABOUT' : {
+# 		"URL" : "https://www.freecodecamp.com/api/users/about?username="
+# 	},
+# 	'GITHUB' : {
+# 		"URL" : "https://api.github.com/users/"
+# 	}
+# }
 # for k,v in checks.items():
 # 	checks[k]["RATE"] = rates[k]
 # 	checks[k]['TIMER'] = time.perf_counter()
@@ -67,16 +77,16 @@ def its_time(source):
 	return now > scheduled
 
 async def update_api():
-	while True:
-		if its_time('GITTER'):
-			await _update_new_members()
-			print('update_memebrs')
-		# if its_time('GITHUB'):  # we never have to check github. avatars are linked. they auto-update.
-		# 	await _update_		  # created times never change. only need to check on 1st appearance
-		if its_time('FCC_ABOUT'):
-			await _update_all_points()
-			print('update_poitns')
-		await asyncio.sleep(_reload_rate)  # conservative
+	# while True:
+	if its_time('GITTER'):
+		await _update_new_members()
+		print('update_memebrs')
+	# if its_time('GITHUB'):  # we never have to check github. avatars are linked. they auto-update.
+	# 	await _update_		  # created times never change. only need to check on 1st appearance
+	if its_time('FCC_ABOUT'):
+		await _update_all_points()
+		print('update_poitns')
+	# await asyncio.sleep(_reload_rate)  # conservative
 
 async def _update_new_members(limit=None):
 	global _limit
@@ -168,7 +178,6 @@ async def _get_points(username):
 	else:
 		return {'username':username, 'points':data['about'].get('browniePoints',-3)}
 
-_github_ratelimit_reset = None
 # created returned as None if call failed for any reason
 async def _get_github(username):
 	default = {'username':username, 'created':None}
@@ -187,22 +196,22 @@ async def _get_github(username):
 	return {'username':username, 'created':data.get('created_at')}
 
 async def get_ratelimit(url):
-	global _github_ratelimit_reset
 	async with aiohttp.get(url) as r:
 		resp = r;
 		headers = r.headers
 	if headers['X-RateLimit-Remaining'] == 0:
-		_github_ratelimit_reset = headers['X-RateLimit-Reset']
-		logging.warning('RATE LIMIT from {} for {} minutes'.format(url,(_github_ratelimit_reset - time.time())/60))
+		_api_output["GITHUB_RATELIMIT_RESET"] = headers['X-RateLimit-Reset']
+		logging.warning('RATE LIMIT from {} for {} minutes'.format(url,(_api_output["GITHUB_RATELIMIT_RESET"] - time.time())/60))
+		save_json(_api, _api_output)
 		return False
 	return True
 
 def still_ratelimited():
-	global _github_ratelimit_reset
-	if _github_ratelimit_reset is None:
+	if _api_output["GITHUB_RATELIMIT_RESET"] is None:
 		return False
-	if time.time() > _github_ratelimit_reset:
-		_github_ratelimit_reset = None
+	if time.time() > _api_output["GITHUB_RATELIMIT_RESET"]:
+		_api_output["GITHUB_RATELIMIT_RESET"] = None
+		save_json(_api, _api_output)
 
 # should hand rate limits in here since we get the json here..
 async def get_api(url, headers=None):
