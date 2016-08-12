@@ -143,7 +143,7 @@ function updateCamper(camper) {
 }
 function _displayCamper(place, camper) {
   // avatar
-  var img = '<img class="avatar mostly_transparent" src="images/favicons/android-chrome-192x192.png" alt="" />'; // insert no-avatar image here
+  var img = '<img class="avatar mostly_transparent" src="static/images/favicons/android-chrome-192x192.png" alt="" />'; // insert no-avatar image here
   if (camper.avatar !== null) {
     img = '<img class="avatar" src="'+camper.avatar+'" alt="" />';
   }
@@ -154,7 +154,7 @@ function _displayCamper(place, camper) {
   $('#place'+place).append('<div class="age col2">Joined '+camper.daysOld+' days ago.</div>')
   if (camper.points >= 0) {
     $('#place'+place).append('<div class="points"><h4>Brownie Points: '+camper.points+'</h4>'+
-        '<img class="brownie" src="images/ranks/brownie'+camper.rank+'.png" alt="rank'+camper.rank+'"/>'+
+        '<img class="brownie" src="static/images/ranks/brownie'+camper.rank+'.png" alt="rank'+camper.rank+'"/>'+
         '</div>');
   }
   else {
