@@ -6,7 +6,7 @@ import subprocess
 import traceback
 
 # use this instead later https://github.com/twisted/klein
-settings = read_json('settings.json')
+settings = read_json('data/settings.json')
 reload_rate = min(settings['REFRESH_RATES'].values())
 begin_time = time.perf_counter()
 api_path = settings['API_PATH']
@@ -37,6 +37,6 @@ def api():
 
 if __name__ == "__main__":
 	logging.info("starting worker")
-	sub = subprocess.Popen(['python3', 'worker.py'])
+	sub = subprocess.Popen(['python3', 'utils/worker.py'])
 	logging.info(str(sub))
 	app.run(host="0.0.0.0", port=5000)

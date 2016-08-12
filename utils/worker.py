@@ -6,9 +6,9 @@ import datetime
 import logging
 import time
 
-settings = read_json('settings.json')
+settings = read_json('data/settings.json')
 rates = settings['REFRESH_RATES']
-_gitter_key = read_json('api_keys.json')['GITTER']
+_gitter_key = read_json('data/api_keys.json')['GITTER']
 _gitter_room_id = settings['GITTER_ROOM_ID']
 _api = settings['API_PATH']
 _limit = settings["GITTER_USER_LIMIT"]
@@ -106,7 +106,7 @@ async def _update_new_members(limit=None):
 		else:
 			limit = resp['userCount']*2
 		settings["GITTER_USER_LIMIT"] = _limit = limit
-		save_json("settings.json",settings)
+		save_json("data/settings.json",settings)
 
 	# update api data
 	# use gather, if created is null, recheck.

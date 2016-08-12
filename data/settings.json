@@ -5,5 +5,5 @@
 	},
 	"GITTER_USER_LIMIT" : 300,
 	"GITTER_ROOM_ID" : "56f9df0785d51f252abb4f57",
-	"API_PATH" : "api.json"
+	"API_PATH" : "data/api.json"
 }
