@@ -182,6 +182,8 @@ async def _get_points(username):
 async def _get_github(username):
 	default = {'username':username, 'created':None}
 	if still_ratelimited():
+		print('rate_limited')
+		print(_api_output['GITHUB_RATELIMIT_RESET'])
 		return default
 	url = "https://api.github.com/users/"+username
 	try:
