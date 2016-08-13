@@ -7,7 +7,7 @@ function updateRank(camper) {
   var rank = 0;
   for(let threshold of ranks) {
     if(camper.points < threshold) {
-      console.log(camper.username +' is rank '+rank);
+      // console.log(camper.username +' is rank '+rank);
       break;
     }
     rank++;
@@ -50,12 +50,12 @@ function apiRequests() {
   });
 }
 function updateDateFilter() {
-  console.log('updating date.');
+  // console.log('updating date.');
 /*  for (let stuff in $('#age-filter-selector')) {
     console.log(stuff);
     console.log($('#age-filter-selector')[stuff]);
   }*/
-  console.log($('#age-filter-selector').val());
+  // console.log($('#age-filter-selector').val());
   dateThreshold = new Date($('#age-filter-selector').val());
   //dateThreshold = new Date($('#age-filter-selector').value);
   //console.log($('#age-filter-selector').value);
@@ -73,13 +73,13 @@ function updateCamper(camper) {
       break;
     }
   }
-  console.log(camper)
+  // console.log(camper)
   arrayOfCampers.sort(function(a, b) {
     return b.points - a.points;
   });
   var filteredUsers = arrayOfCampers.filter(aCamper => aCamper.created > dateThreshold)
-  console.log('filtered users:');
-  console.log(filteredUsers);
+  // console.log('filtered users:');
+  // console.log(filteredUsers);
   //$('.leaderboard > .container').html('<div>Displaying Users that joined within '+dateToAge(dateThreshold)+' days</div>')
   $('.leaderboard > .container').html('');
   var found = false;
@@ -105,7 +105,7 @@ function _displayCamper(place, camper) {
       '<span class="mention">@' + camper.username + '</span></div>');
 
   // age
-  $('#place'+place).append('<div class="age col2">Joined '+camper.daysOld+' days ago.</div>')
+  $('#place'+place).append('<div class="age col2">Joined '+camper.daysOld+' days ago.</div>');
   if (camper.points >= 0) {
     $('#place'+place).append('<div class="points"><h4>Brownie Points: '+camper.points+'</h4>'+
         '<img class="brownie" src="images/ranks/brownie'+camper.rank+'.png" alt="rank'+camper.rank+'"/>'+
@@ -115,9 +115,35 @@ function _displayCamper(place, camper) {
     $('#place'+place).append('<div class="error"><h4>Account not linked to freeCodeCamp</h4></div>');
   }
 }
-
+function updateLeaderboard() {
+  $.ajax({
+    async: true,
+    url: 'https://crossorigin.me/http://freecodecamp.guam.org/api?_=' + new Date().getTime(),
+    method: 'GET',
+    dataType: 'json',
+    success: function(apiData) {
+      arrayOfCampers.forEach(function(camperObject, index) {
+        if (camperObject.points < apiData.CAMPERS[camperObject.username].points) {
+          camperObject.points = apiData.CAMPERS[camperObject.username].points;
+          $('#place' + (index + 1) + ' > .points > h4').text('Brownie Points: ' + camperObject.points);
+        }
+      });
+      var changes = {};
+      arrayOfCampers.sort(function(a, b) {
+        return b.points - a.points;
+      });
+      console.log(changes);
+    },
+    error: function() {
+      console.log('Could not load API.');
+    }
+  });
+}
 $(document).ready(function() {
   apiRequests();
+  setInterval(function() {
+    updateLeaderboard();
+  }, 60000);
   // http://stackoverflow.com/questions/15991356/jquery-scroll-to-section-of-page
   for (let label of ["home","about","contact","leaderboard"]) {
     $("#"+label).click(function() {
