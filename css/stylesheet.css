@@ -273,6 +273,15 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
   text-align: center;
   width: 70%;
 }
+#tributes {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+#tributes h2{
+  margin: 0;
+  padding: 0;
+}
 #navFooter{
   border-radius: 0%;
   margin: 20px 0px 0px 0px;
