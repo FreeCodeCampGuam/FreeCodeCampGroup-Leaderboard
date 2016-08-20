@@ -35,7 +35,7 @@ function daysBetween(startDate, endDate) {
 function apiRequests() {
   $.ajax({
     async: true,
-    url: 'https://crossorigin.me/http://freecodecamp.guam.org/api',
+    url: 'https://crossorigin.me/http://freecodecamp.guam.org/api' + '?_=' + new Date().getTime(),
     method: 'GET',
     dataType: 'json',
     success: function(apiData) {
