@@ -1,1 +1,1 @@
-<?php header( 'Location: /tributes.html?v=0.1.2' ) ;  ?>
+<?php header( 'Location: /tributes.html?v=0.1.3' ) ;  ?>
